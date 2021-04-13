@@ -35,7 +35,7 @@ public class LoginController extends HttpServlet {
 			String alert = request.getParameter("alert");
 			String message = request.getParameter("message");
 			if (message != null && alert != null) {
-				request.setAttribute("message", "ログインに失敗しました。");
+				request.setAttribute("message", "※ログインに失敗しました。");
 				request.setAttribute("alert", alert);
 			}
 			RequestDispatcher rd = request.getRequestDispatcher("/views/login.jsp");

@@ -1,0 +1,12 @@
+.center-div{
+	margin: 60px auto 30px;
+	padding: 50px 70px 70px 71px;
+}
+#userLabel, #passLabel {
+	padding-left:30%
+}
+#butSubmit{
+	display: flex;
+    align-items: center;
+    justify-content: center
+}
