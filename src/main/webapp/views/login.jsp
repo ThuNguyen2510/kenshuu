@@ -21,7 +21,7 @@
 
 
 		<div class="row" style="padding-top: 10px;">
-			<h2>ログイン</h2>
+			<font size="8">ログイン</font>
 		</div>
 
 

@@ -18,4 +18,14 @@ public class UserDAOImpl extends BaseDAOImpl<User> implements UserDAO {
 
 	}
 
+	@Override
+	public List<User> getListUser() {
+		StringBuilder sql = new StringBuilder("SELECT * FROM public.mst_user as u");
+		sql.append(" LEFT JOIN public.mst_role as r ON u.authority_id = r.authority_id ");
+		sql.append("LEFT JOIN public.mst_gender as g ON u.gender_id = g.gender_id");
+		System.out.println(sql);
+		List<User> list = query(sql.toString(),new UserMapper());
+		return list;
+	}
+
 }

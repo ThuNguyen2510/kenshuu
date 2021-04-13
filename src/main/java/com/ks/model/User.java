@@ -25,6 +25,26 @@ public class User {
 
 	private long updateDate;
 
+	private Role role;
+
+	private Gender gender;
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+	public Gender getGender() {
+		return gender;
+	}
+
+	public void setGender(Gender gender) {
+		this.gender = gender;
+	}
+
 	public String getUserId() {
 		return userId;
 	}

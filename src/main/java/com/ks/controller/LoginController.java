@@ -30,7 +30,7 @@ public class LoginController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		if (request.getSession().getAttribute("currentUser") != null) { // check user is logged in
-			response.sendRedirect(request.getContextPath() + "/admin-user");
+			response.sendRedirect(request.getContextPath() + "/admin-user?action=get");
 		} else {
 			String alert = request.getParameter("alert");
 			String message = request.getParameter("message");
@@ -54,7 +54,7 @@ public class LoginController extends HttpServlet {
 			if (user != null) {
 				logger.info("LOGIN SUCCESS");
 				session.setAttribute("currentUser", user); // save user in session
-				response.sendRedirect(request.getContextPath() + "/admin-user");
+				response.sendRedirect(request.getContextPath() + "/admin-user?action=get");
 			} else {
 				logger.info("LOGIN FAIL");
 				response.sendRedirect(request.getContextPath() + "/login?message=fail&alert=danger");
