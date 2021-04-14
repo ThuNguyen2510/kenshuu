@@ -32,14 +32,14 @@ public class UserDAOImpl extends BaseDAOImpl<User> implements UserDAO {
 	@Override
 	public List<User> search(String familyName, String firstName, int authorityId) {
 		if (familyName.equals("")) {
-			familyName = " is not null";//familyNameが入力しない場合、familyNameが区別しなくて、全てのデータを取る
+			familyName = " is not null";//familyNameが入力しない場合、familyNameが比較しなくて、全てのデータを取る
 		} else {
-			familyName = " LIKE '" + familyName + "'";//familyNameが入力した場合、familyNameのインプットをセットする
+			familyName = " LIKE '%" + familyName + "%'";//familyNameが入力した場合、familyNameのインプットを比較する
 		}
 		if (firstName.equals("")) {
 			firstName = " is not null";
 		} else {
-			firstName = " LIKE '" + firstName + "'";
+			firstName = " LIKE '%" + firstName + "%'";
 		}
 		String auId = "";
 		if (authorityId == -1) {
