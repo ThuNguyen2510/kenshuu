@@ -9,6 +9,7 @@ public class RoleMapper implements RowMapper<Role> {
 	@Override
 	public Role mapRow(ResultSet rs) {
 		try {
+			/*データベースの結果セットをRoleのフィールドにそれぞれマップする*/
 			Role role = new Role();
 			role.setAuthorityId(rs.getInt("authority_id"));
 			role.setAuthorityName(rs.getString("authority_name"));

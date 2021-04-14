@@ -9,6 +9,7 @@ public class GenderMapper implements RowMapper<Gender> {
 	@Override
 	public Gender mapRow(ResultSet rs) {
 		try {
+			/*データベースの結果セットをGenderのフィールドにそれぞれマップする*/
 			Gender gen = new Gender();
 			gen.setGenderId(rs.getInt("gender_id"));
 			gen.setGenderName(rs.getString("gender_name"));

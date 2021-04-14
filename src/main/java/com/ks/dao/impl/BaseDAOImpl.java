@@ -26,7 +26,7 @@ public class BaseDAOImpl<T> implements BaseDAO<T>{
 	public static Connection getConnection() throws SQLException {
 		try {
 			Class.forName(DRIVER);
-			connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);//DB接続
 			System.out.println("CONNECT SUCCESS!!");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -45,10 +45,10 @@ public class BaseDAOImpl<T> implements BaseDAO<T>{
 		try {
 			connection = getConnection();
 			statement = connection.prepareStatement(sql);
-			setParameter(statement, parameters);
-			resultSet = statement.executeQuery();
+			setParameter(statement, parameters);//インプット（パラメータ）をセットする
+			resultSet = statement.executeQuery();//SQLクエリーを実行する
 			while (resultSet.next()) {
-				results.add(rowMapper.mapRow(resultSet));
+				results.add(rowMapper.mapRow(resultSet));//結果をマップして、リストに保存する
 			}
 			return results;
 		} catch (SQLException e) {
@@ -67,8 +67,8 @@ public class BaseDAOImpl<T> implements BaseDAO<T>{
 	private void setParameter(PreparedStatement statement, Object... parameters) {
 		try {
 			for (int i = 0; i < parameters.length; i++) {
-				Object parameter = parameters[i];
-				int index = i + 1;
+				Object parameter = parameters[i];//パラメータを取る
+				int index = i + 1;//パラメータの位置をとる
 				if (parameter instanceof Long) {
 					statement.setLong(index, (Long) parameter);
 				} else if (parameter instanceof String) {

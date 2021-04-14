@@ -12,6 +12,7 @@ public class UserMapper implements RowMapper<User> {
 	@Override
 	public User mapRow(ResultSet resultSet) {
 		try {
+			/*データベースの結果セットをユーザのフィールドにそれぞれマップする*/
 			User user = new User();
 			user.setUserId(resultSet.getString("user_id"));
 			user.setPassword(resultSet.getString("password"));
@@ -26,6 +27,7 @@ public class UserMapper implements RowMapper<User> {
 			user.setUpdateDate(resultSet.getLong("update_date"));
 			user.setUpdateUserId(resultSet.getString("update_user_id"));
 			try {
+				/*ユーザのgender_nameを取る時*/
 				if (resultSet.getString("gender_name")!=null) {
 					Gender gen = new Gender();
 					gen.setGenderName(resultSet.getString("gender_name"));
@@ -33,6 +35,7 @@ public class UserMapper implements RowMapper<User> {
 					user.setGender(gen);
 				}
 				if (resultSet.getString("authority_name")!=null) {
+					/*ユーザのauthority_nameを取る時*/
 					Role role = new Role();
 					role.setAuthorityName(resultSet.getString("authority_name"));
 					role.setAuthorityId(resultSet.getInt("authority_id"));
@@ -41,7 +44,6 @@ public class UserMapper implements RowMapper<User> {
 			}catch(Exception ex) {
 
 			}
-
 			return user;
 		} catch (SQLException e) {
 			return null;

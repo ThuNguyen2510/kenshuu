@@ -38,16 +38,16 @@ public class UserController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String action = request.getParameter("action");
-		String viewLink = "";
+		String action = request.getParameter("action");// アクションタイプを取る
+		String viewLink = "";//ビューのリングを保存する
 		if (action != null) {
-			if (action.equals("get")) {
+			if (action.equals("get")) {//全てのデータを表示するアクションタイプ
 				logger.info("GET LIST USER");
-				viewLink = "/views/admin/home.jsp";
-				List<User> listUser = userService.getListUser();
-				List<Role> listRole = roleService.getListRole();
-				request.setAttribute("listUser", listUser);
-				request.setAttribute("listRole", listRole);
+				viewLink = "/views/admin/home.jsp";//リングをセットする
+				List<User> listUser = userService.getListUser();//全てのユーザを取る
+				List<Role> listRole = roleService.getListRole();//全ての役職を取る
+				request.setAttribute("listUser", listUser);//ユーザリストを保存する
+				request.setAttribute("listRole", listRole);//役職リストを保存する
 			}
 		}
 
