@@ -7,4 +7,5 @@ import com.ks.model.User;
 public interface UserDAO {
 	User checkByUserIdAndPassword(String userId, String password);
 	List<User> getListUser();
+	List<User> search(String familyName, String firstName, int authorityId);
 }

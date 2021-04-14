@@ -14,16 +14,22 @@
 	src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
 <body>
 	<%@ include file="/views/layout/header.jsp"%>
+	<c:if test="${not empty message}">
+	<div >
+	<h5 style="padding-left: 20px;color:red">${message}</h5>
+	</div>
+	</c:if>
 	<div id="layoutSidenav_content">
 		<main>
-		<div class="container-fluid">
+		<div class="container-fluid" style="margin-top:20px">
 			<div class="card mb-4">
-				<form action="<c:url value='/kenshuu/search'/>" method="post">
+				<form action="<c:url value='/admin-user'/>" method="post">
 					<div class="card-body">
 						<div class="form-group row">
 							<div class="col-md-6">
@@ -55,10 +61,10 @@
 									</div>
 									<div class="col-md-8">
 										<select name="authorityId" style="width: 182px; height: 30px">
-											<option></option>
+											<option value="-1"></option>
+
 											<c:forEach var="item" items="${listRole}">
-												<option value="${item.authorityId}"
-													<c:if test="${item.authorityId == model.authorityId}">selected="selected"</c:if>>
+												<option value="${item.authorityId}">
 													${item.authorityName}</option>
 											</c:forEach>
 										</select> </select>
@@ -76,7 +82,7 @@
 
 									<div class="col-md-5">
 
-										<button id="search" type="button" class="btn btn-primary"
+										<button id="search" type="submit" class="btn btn-primary"
 											style="width: 150px; border-radius: 10px;">検索</button>
 
 									</div>
@@ -113,7 +119,7 @@
 								<tr>
 									<td style="text-align: right">${i}</td>
 									<td>${item.userId}</td>
-									<td>${item.familyName} ${item.firstName}</td>
+									<td>${item.familyName}${item.firstName}</td>
 									<td>${item.gender.genderName}</td>
 									<td style="text-align: right">${item.age}</td>
 									<td><c:if test="${item.admin==1}">

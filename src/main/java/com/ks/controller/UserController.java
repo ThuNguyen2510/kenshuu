@@ -54,4 +54,28 @@ public class UserController extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher(viewLink);
 		rd.forward(request, response);
 	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String action = request.getParameter("action");// アクションタイプを取る
+		logger.info(action);
+		String viewLink = "";//ビューのリングを保存する
+		if (action != null) {
+			if (action.equals("search")) {
+				viewLink = "/views/admin/home.jsp";//リングをセットする
+				List<Role> listRole = roleService.getListRole();//全ての役職を取る
+				logger.info("SEARCH");
+				List<User> listUser = userService.search(request.getParameter("familyName"),
+						request.getParameter("firstName"), Integer.valueOf(request.getParameter("authorityId")));//パラメータを取って、見つける
+				request.setAttribute("listUser", listUser);//ユーザリストを保存する
+				request.setAttribute("listRole", listRole);//役職リストを保存する
+				if(listUser.size()==0) {
+					request.setAttribute("message", "※ユーザが見つかりません。");//見つからない場合、メッセージをセットする
+				}
+
+			}
+		}
+		RequestDispatcher rd = request.getRequestDispatcher(viewLink);
+		rd.forward(request, response);
+	}
 }

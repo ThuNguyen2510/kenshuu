@@ -46,6 +46,7 @@ public class BaseDAOImpl<T> implements BaseDAO<T>{
 			connection = getConnection();
 			statement = connection.prepareStatement(sql);
 			setParameter(statement, parameters);//インプット（パラメータ）をセットする
+			System.out.println(sql);
 			resultSet = statement.executeQuery();//SQLクエリーを実行する
 			while (resultSet.next()) {
 				results.add(rowMapper.mapRow(resultSet));//結果をマップして、リストに保存する
