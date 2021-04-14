@@ -21,13 +21,13 @@
 <body>
 	<%@ include file="/views/layout/header.jsp"%>
 	<c:if test="${not empty message}">
-	<div >
-	<h5 style="padding-left: 20px;color:red">${message}</h5>
-	</div>
+		<div>
+			<h5 style="padding-left: 20px; color: red">${message}</h5>
+		</div>
 	</c:if>
 	<div id="layoutSidenav_content">
 		<main>
-		<div class="container-fluid" style="margin-top:20px">
+		<div class="container-fluid" style="margin-top: 20px">
 			<div class="card mb-4">
 				<form action="<c:url value='/admin-user'/>" method="post">
 					<div class="card-body">
@@ -109,7 +109,12 @@
 								<th>性別</th>
 								<th>年齢</th>
 								<th>役職</th>
-								<th><button style="width: 100%" class="btn btn-primary">登録</button></th>
+								<th>
+									<form action="<c:url value='/admin-user'/>" method="get">
+									<input type="hidden" value="create" name="action"/>
+										<button style="width: 100%" class="btn btn-primary">登録</button>
+									</form>
+								</th>
 							</tr>
 						</thead>
 

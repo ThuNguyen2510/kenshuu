@@ -9,10 +9,12 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.ks.dao.BaseDAO;
 import com.ks.mapper.RowMapper;
 
-public class BaseDAOImpl<T> implements BaseDAO<T>{
+public class BaseDAOImpl<T> implements BaseDAO<T> {
 	private static final String URL = "jdbc:postgresql://localhost:5432/kenshuu";
 
 	private static final String DRIVER = "org.postgresql.Driver";
@@ -22,6 +24,7 @@ public class BaseDAOImpl<T> implements BaseDAO<T>{
 	private static final String PASSWORD = "123456";
 
 	private static Connection connection = null;
+	private static final Logger logger = Logger.getLogger(BaseDAOImpl.class);
 
 	public static Connection getConnection() throws SQLException {
 		try {
@@ -46,7 +49,7 @@ public class BaseDAOImpl<T> implements BaseDAO<T>{
 			connection = getConnection();
 			statement = connection.prepareStatement(sql);
 			setParameter(statement, parameters);//インプット（パラメータ）をセットする
-			System.out.println(sql);
+			logger.info(statement);
 			resultSet = statement.executeQuery();//SQLクエリーを実行する
 			while (resultSet.next()) {
 				results.add(rowMapper.mapRow(resultSet));//結果をマップして、リストに保存する
@@ -56,7 +59,7 @@ public class BaseDAOImpl<T> implements BaseDAO<T>{
 			return null;
 		} finally {
 			try {
-				if (connection != null || statement!= null || resultSet!= null) {
+				if (connection != null || statement != null || resultSet != null) {
 					connection.close();
 				}
 			} catch (SQLException e) {

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
+import com.ks.model.Gender;
 import com.ks.model.Role;
 import com.ks.model.User;
 import com.ks.service.GenderService;
@@ -49,6 +50,14 @@ public class UserController extends HttpServlet {
 				request.setAttribute("listUser", listUser);//ユーザリストを保存する
 				request.setAttribute("listRole", listRole);//役職リストを保存する
 			}
+			if (action.equals("create")) {
+				logger.info("CREATE USER");
+				viewLink = "/views/admin/create.jsp";
+				List<Gender> listGender = genderService.getListGender();
+				List<Role> listRole = roleService.getListRole();
+				request.setAttribute("listGender", listGender);
+				request.setAttribute("listRole", listRole);
+			}
 		}
 
 		RequestDispatcher rd = request.getRequestDispatcher(viewLink);
@@ -69,11 +78,23 @@ public class UserController extends HttpServlet {
 						request.getParameter("firstName"), Integer.valueOf(request.getParameter("authorityId")));//パラメータを取って、見つける
 				request.setAttribute("listUser", listUser);//ユーザリストを保存する
 				request.setAttribute("listRole", listRole);//役職リストを保存する
-				if(listUser.size()==0) {
+				if (listUser==null || listUser.size()==0) {
 					request.setAttribute("message", "※ユーザが見つかりません。");//見つからない場合、メッセージをセットする
 				}
 
 			}
+			if(action.equals("create")) {
+				User newUser = new User();
+				logger.info("SAVE NEW USER");
+				String userId = request.getParameter("userId");
+				String password = request.getParameter("password");
+				String familyName =request.getParameter("familyName");;
+				String firstName=request.getParameter("firstName");;
+				int admin=Integer.valueOf(request.getParameter("admin"));
+				String message="";
+
+			}
+
 		}
 		RequestDispatcher rd = request.getRequestDispatcher(viewLink);
 		rd.forward(request, response);
