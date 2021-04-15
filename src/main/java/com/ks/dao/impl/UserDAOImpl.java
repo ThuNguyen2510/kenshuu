@@ -1,6 +1,7 @@
 package com.ks.dao.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.ks.dao.UserDAO;
@@ -51,6 +52,32 @@ public class UserDAOImpl extends BaseDAOImpl<User> implements UserDAO {
 		List<User> list = query2(sql.toString(), new UserMapper(), params);
 		return list;
 
+	}
+
+	@Override
+	public boolean createUser(User newUser) {
+		StringBuilder sql = new StringBuilder(
+				"INSERT INTO public.mst_user (user_id, password, family_name, first_name,");
+		sql.append(" admin, create_user_id, update_user_id, create_date, update_date, age, authority_id, gender_id)");
+		sql.append(" VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+		if (getUser(newUser.getUserId()) != null) {//登録済みのユーザIDで登録した場合
+			return false;
+		}
+		newUser.setUpdateUserId(newUser.getCreateUserId());
+		newUser.setCreateDate(new Date().getTime() / 1000);
+		newUser.setUpdateDate(new Date().getTime() / 1000);
+		create(sql.toString(), newUser.getUserId(), newUser.getPassword(), newUser.getFamilyName(),
+				newUser.getFirstName(), newUser.getAdmin(), newUser.getCreateUserId(),
+				newUser.getUpdateUserId(), newUser.getCreateDate(), newUser.getUpdateDate(), newUser.getAge(),
+				newUser.getAuthorityId(), newUser.getGenderId());
+		return true;
+	}
+
+	@Override
+	public User getUser(String userId) {
+		StringBuilder sql = new StringBuilder("SELECT * FROM public.mst_user WHERE user_id = ? ");
+		List<User> users = query(sql.toString(), new UserMapper(), userId);//　SQLクエリーを実行して、リストに保存する
+		return users.size()==0? null: users.get(0);
 	}
 
 }

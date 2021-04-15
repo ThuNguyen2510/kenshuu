@@ -53,7 +53,7 @@ public class LoginController extends HttpServlet {
 			HttpSession session = request.getSession();
 			if (user != null) {
 				logger.info("LOGIN SUCCESS");
-				session.setAttribute("currentUser", user); // save user in session
+				session.setAttribute("currentUser", user.getUserId()); // save user in session
 				response.sendRedirect(request.getContextPath() + "/admin-user?action=get");
 			} else {
 				logger.info("LOGIN FAIL");

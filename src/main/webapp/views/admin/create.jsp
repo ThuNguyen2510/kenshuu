@@ -12,17 +12,32 @@
 	rel="stylesheet" id="bootstrap-css">
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script
-	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+<script type="text/javascript"
+	src="<c:url value="/template/admin/js/form-validation.js"/>"></script>
 </head>
+
 <body>
+	<style>
+.errorTxt {
+	min-height: 20px;
+}
+
+h3 {
+	padding-left: 15%;
+	color: red
+}
+</style>
 	<font style="padding: 30px;" size="8">登録</font>
 
-	<div>
+	<div class="errorTxt">
 		<c:if test="${not empty message}">
-			<h3 style="padding-left: 15%; color: red">${message}</h3>
+			<h3>${message}</h3>
 		</c:if>
 	</div>
 
@@ -30,7 +45,8 @@
 		<main>
 		<div class="container-fluid" style="margin-top: 100px">
 			<div class="card mb-4" style="padding-left: 10%">
-				<form action="<c:url value='/admin-user'/>" method="post">
+				<form action="<c:url value='/admin-user'/>" method="post"
+					name="registration" method="post">
 					<div class="card-body">
 						<div class="form-group row">
 							<div class="col-md-6">
@@ -39,7 +55,8 @@
 										<strong>ユーザID:</strong>
 									</div>
 									<div class="col-md-8">
-										<input type="text" name="userId" />
+										<input id="userId" type="text" value="${model.userId}"
+											name="userId" />
 									</div>
 								</div>
 							</div>
@@ -49,7 +66,8 @@
 										<strong>パスワード:</strong>
 									</div>
 									<div class="col-md-8">
-										<input name="password" type="text" />
+										<input id="password" name="password" value="${model.password}"
+											type="text" />
 									</div>
 								</div>
 							</div>
@@ -61,7 +79,8 @@
 										<strong>姓:</strong>
 									</div>
 									<div class="col-md-8">
-										<input type="text" name="familyName" />
+										<input type="text" id="familyname" name="familyName"
+											value="${model.familyName}" />
 									</div>
 								</div>
 							</div>
@@ -71,7 +90,8 @@
 										<strong>名:</strong>
 									</div>
 									<div class="col-md-8">
-										<input name="firstName" type="text" />
+										<input name="firstName" id="firstname" type="text"
+											value="${model.firstName}" />
 									</div>
 								</div>
 							</div>
@@ -85,12 +105,20 @@
 									<div class="col-md-8">
 										<select name="genderId" style="width: 182px; height: 30px">
 											<option value="-1"></option>
-
-											<c:forEach var="item" items="${listGender}">
-												<option value="${item.genderId}">
-													${item.genderName}</option>
-											</c:forEach>
+											<c:if test="${empty model.genderId}">
+												<c:forEach var="item" items="${listGender}">
+													<option value="${item.genderId}">${item.genderName}</option>
+												</c:forEach>
+											</c:if>
+											<c:if test="${not empty model.genderId}">
+												<c:forEach var="item" items="${listGender}">
+													<option value="${item.genderId}"
+														<c:if test="${item.genderId == model.genderId}">selected="selected"</c:if>>${item.genderName}
+													</option>
+												</c:forEach>
+											</c:if>
 										</select>
+
 									</div>
 								</div>
 							</div>
@@ -100,7 +128,7 @@
 										<strong>年齢:</strong>
 									</div>
 									<div class="col-md-8">
-										<input name="age" type="text" />
+										<input id="age" name="age" type="text" />
 									</div>
 								</div>
 							</div>
@@ -114,10 +142,18 @@
 									<div class="col-md-8">
 										<select name="authorityId" style="width: 182px; height: 30px">
 											<option value="-1"></option>
-											<c:forEach var="item" items="${listRole}">
-												<option value="${item.authorityId}">
-													${item.authorityName}</option>
-											</c:forEach>
+											<c:if test="${empty model.authorityId}">
+												<c:forEach var="item" items="${listRole}">
+													<option value="${item.authorityId}">${item.authorityName}</option>
+												</c:forEach>
+											</c:if>
+											<c:if test="${not empty model.authorityId}">
+												<c:forEach var="item" items="${listRole}">
+													<option value="${item.authorityId}"
+														<c:if test="${item.authorityId == model.authorityId}">selected="selected"</c:if>>${item.authorityName}
+													</option>
+												</c:forEach>
+											</c:if>
 										</select>
 									</div>
 								</div>
@@ -128,8 +164,8 @@
 										<strong>管理者:</strong>
 									</div>
 									<div class="col-md-8">
-										<input type="checkbox" id="admin" style="width: 20px; height: 20px;" value="0"
-											name="admin">
+										<input type="checkbox" id="admin"
+											style="width: 20px; height: 20px;" value="${model.admin}" name="admin">
 									</div>
 								</div>
 
@@ -141,7 +177,8 @@
 									class="btn btn-secondary">戻る</button>
 							</div>
 							<div class="col-sm-5">
-								<button id ="create" name="action" type="submit"
+								<input type="hidden" name="action" value="create">
+								<button id="create" name="action" type="submit"
 									class="btn btn-primary">登録</button>
 							</div>
 						</div>
@@ -153,14 +190,14 @@
 	</div>
 	<script>
 		$("#back").click(function() {
-			window.location.href="/kenshuu/admin-user?action=get";
+			window.location.href = "/kenshuu/admin-user?action=get";
 		});
-		$("input[type='checkbox']").on('change', function(){
-			  $(this).val(this.checked ? "1" : "0");
-			})
+		$("input[type='checkbox']").on('change', function() {
+			$(this).val(this.checked ? "1" : "0");
+		})
 		$("#create").click(function() {
-			if(confirm("登録してよろしいですか？")==false)
-		        return false;
+			if (confirm("登録してよろしいですか？") == false)
+				return false;
 
 		});
 	</script>

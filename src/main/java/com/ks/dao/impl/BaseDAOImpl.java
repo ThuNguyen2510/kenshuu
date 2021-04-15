@@ -90,7 +90,11 @@ public class BaseDAOImpl<T> implements BaseDAO<T> {
 			if (p instanceof String) {
 				statement.setString(index, (String) p);
 			} else if (p instanceof Integer) {
-				statement.setInt(index, (Integer) p);
+				Integer num = (Integer) p;
+				if (num == -1) {
+					statement.setObject(index, null);
+				} else
+					statement.setInt(index, (Integer) p);
 			} else if (p instanceof Long) {
 				statement.setLong(index, (Long) p);
 			}
@@ -127,6 +131,38 @@ public class BaseDAOImpl<T> implements BaseDAO<T> {
 				return null;
 			}
 		}
+	}
+
+	@Override
+	public void create(String sql, Object... params) {
+		Connection connection = null;
+		PreparedStatement statement = null;
+		try {
+			connection = getConnection();
+			connection.setAutoCommit(false);//コミットを呼ぶとき、データベースを変更する
+			statement = connection.prepareStatement(sql);
+			setParameter(statement, params);//インプット（パラメータ）をセットする
+			logger.info(statement);
+			statement.executeUpdate();//SQLクエリーを実行する
+			connection.commit();// データを変更する
+		} catch (SQLException e) {
+			if (connection != null) {
+				try {
+					connection.rollback();//最初のデータを取る
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+		} finally {
+			try {
+				if (connection != null || statement != null) {
+					connection.close();//接続閉じる
+				}
+			} catch (SQLException e_) {
+				e_.printStackTrace();
+			}
+		}
+
 	}
 
 }

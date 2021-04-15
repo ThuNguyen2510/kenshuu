@@ -21,6 +21,7 @@ import com.ks.service.UserService;
 import com.ks.service.impl.GenderServiceImpl;
 import com.ks.service.impl.RoleServiceImpl;
 import com.ks.service.impl.UserServiceImpl;
+import com.ks.utils.ValidateUser;
 
 @WebServlet("/admin-user")
 public class UserController extends HttpServlet {
@@ -57,6 +58,7 @@ public class UserController extends HttpServlet {
 				List<Role> listRole = roleService.getListRole();
 				request.setAttribute("listGender", listGender);
 				request.setAttribute("listRole", listRole);
+				request.setAttribute("model", new User());
 			}
 		}
 
@@ -78,25 +80,52 @@ public class UserController extends HttpServlet {
 						request.getParameter("firstName"), Integer.valueOf(request.getParameter("authorityId")));//パラメータを取って、見つける
 				request.setAttribute("listUser", listUser);//ユーザリストを保存する
 				request.setAttribute("listRole", listRole);//役職リストを保存する
-				if (listUser==null || listUser.size()==0) {
+				if (listUser == null || listUser.size() == 0) {
 					request.setAttribute("message", "※ユーザが見つかりません。");//見つからない場合、メッセージをセットする
 				}
 
 			}
-			if(action.equals("create")) {
-				User newUser = new User();
+			if (action.equals("create")) {
+				User newUser = mapForm(request);
 				logger.info("SAVE NEW USER");
-				String userId = request.getParameter("userId");
-				String password = request.getParameter("password");
-				String familyName =request.getParameter("familyName");;
-				String firstName=request.getParameter("firstName");;
-				int admin=Integer.valueOf(request.getParameter("admin"));
-				String message="";
+				ValidateUser validator = new ValidateUser();
+				String message = validator.validate(newUser);//ユーザのフィールドをバリデーションチェック、エラーをセットする
+				if (message.equals("")) {
+					request.setAttribute("message", message);
+				} else {
+					boolean rs = userService.createUser(newUser);//登録する
+					if (rs) {//成功場合
+						request.setAttribute("message", "登録完了しました。");
+						viewLink = "/views/admin/success.jsp";
+					} else {//失敗場合/
+						request.setAttribute("message", "※ ユーザIDが重複しています。");
+						viewLink = "/views/admin/create.jsp";
+					}
+				}
 
 			}
 
 		}
 		RequestDispatcher rd = request.getRequestDispatcher(viewLink);
 		rd.forward(request, response);
+	}
+
+	private User mapForm(HttpServletRequest request) {
+		User newUser = new User();
+		newUser.setUserId(request.getParameter("userId"));
+		newUser.setPassword(request.getParameter("password"));
+		newUser.setFamilyName(request.getParameter("familyName"));
+		newUser.setFirstName(request.getParameter("firstName"));
+		newUser.setGenderId(Integer.parseInt(request.getParameter("genderId")));
+		newUser.setAuthorityId(Integer.parseInt(request.getParameter("authorityId")));
+		if (request.getParameter("admin") == null) {
+			newUser.setAdmin(0);
+		} else
+			newUser.setAdmin(1);
+		newUser.setCreateUserId(request.getSession().getAttribute("currentUser").toString());
+		if (request.getAttribute("age") == null) {
+			newUser.setAge(-1);
+		}
+		return newUser;
 	}
 }

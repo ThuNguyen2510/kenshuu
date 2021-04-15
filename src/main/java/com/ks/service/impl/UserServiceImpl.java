@@ -31,4 +31,15 @@ public class UserServiceImpl implements UserService {
 		return userDAO.search(familyName,firstName,authorityId);
 	}
 
+	@Override
+	public boolean createUser(User newUser) {
+		return userDAO.createUser(newUser);
+	}
+
+	@Override
+	public User getUser(String userId) {
+		// TODO 自動生成されたメソッド・スタブ
+		return userDAO.getUser(userId);
+	}
+
 }

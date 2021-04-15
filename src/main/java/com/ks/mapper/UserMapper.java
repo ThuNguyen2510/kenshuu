@@ -46,6 +46,7 @@ public class UserMapper implements RowMapper<User> {
 			}
 			return user;
 		} catch (SQLException e) {
+			System.out.println("NULLL:49");
 			return null;
 		}
 	}
