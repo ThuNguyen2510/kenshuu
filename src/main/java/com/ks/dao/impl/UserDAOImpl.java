@@ -1,5 +1,6 @@
 package com.ks.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.ks.dao.UserDAO;
@@ -31,52 +32,25 @@ public class UserDAOImpl extends BaseDAOImpl<User> implements UserDAO {
 
 	@Override
 	public List<User> search(String familyName, String firstName, int authorityId) {
-		List<User> list = null;
 		StringBuilder sql = new StringBuilder("SELECT * FROM public.mst_user as u");
 		sql.append(" LEFT JOIN public.mst_role as r USING (authority_id)");//　役職テーブルと　LEFT JOIN
-		sql.append(" LEFT JOIN public.mst_gender as g USING (gender_id)");//　性別テーブルと　　LEFT JOIN
+		sql.append(" LEFT JOIN public.mst_gender as g USING (gender_id) WHERE true");//　性別テーブルと　　LEFT JOIN
+		List<Object> param = new ArrayList<>();
 		if (familyName.equals("") != true) {//familyNameフィールドのインプットが入力した場合
-			sql.append(" WHERE (u.family_name = ? )");
-			if (firstName.equals("") != true) {//familyName, firstNameのインプットが入力した場合
-				sql.append(" AND( u.first_name = ? )");
-				if (authorityId != -1) {//familyName, firstName,authorityIdのインプットが入力した場合
-					sql.append(" AND (u.authority_id = ? )"); //　familyName, firstName, authorityIdフィールドによる比較する
-					list = query(sql.toString(), new UserMapper(), familyName, firstName, authorityId);
-				} else {
-					sql.append(" AND (u.authority_id = ? )");//familyName, firstNameフィールドによる比較する
-					list = query(sql.toString(), new UserMapper(), familyName, firstName);
-				}
-
-			} else {
-				if (authorityId != -1) {
-					sql.append(" AND (u.authority_id = ? )");//familyName, authorityIdフィールドによる比較する
-					list = query(sql.toString(), new UserMapper(), familyName, authorityId);
-				} else {
-					list = query(sql.toString(), new UserMapper(), familyName);//familyNameフィールドによる比較する
-				}
-			}
+			sql.append(" AND (u.family_name = ? )");
+			param.add(familyName);
 		}
-		//familyNameフィールドのインプットが入力しない場合
-		else if (firstName.equals("") != true) {
-			sql.append(" WHERE ( u.first_name = ? )");//firstNameフィールドによる比較する
-			if (authorityId != -1) {
-				sql.append(" AND (u.authority_id = ? )");//firstName, authorityIdフィールドによる比較する
-				list = query(sql.toString(), new UserMapper(), firstName, authorityId);
-			} else {
-				//firstNameフィールドによる比較する
-				list = query(sql.toString(), new UserMapper(), firstName);
-			}
+		if (firstName.equals("") != true) {//firstNameフィールドのインプットが入力した場合
+			sql.append(" AND (u.first_name = ? )");
+			param.add(firstName);
 		}
-		//familyName、firstNameフィールドのインプットが入力しない場合
-		else if (authorityId != -1) {
-			sql.append(" WHERE (u.authority_id = ? )");//authorityIdフィールドによる比較する
-			list = query(sql.toString(), new UserMapper(), authorityId);
+		if (authorityId != -1) {//authorityIdフィールドのインプットが入力した場合
+			sql.append(" AND (u.authority_id = ? )");
+			param.add(authorityId);
 		}
-		//インプットがない場合
-		else {
-			list = query(sql.toString(), new UserMapper());//全てのデータを取る
-		}
+		List<User> list = query2(sql.toString(), new UserMapper(), param);
 		return list;
+
 	}
 
 }

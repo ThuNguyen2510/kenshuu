@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,22 +68,65 @@ public class BaseDAOImpl<T> implements BaseDAO<T> {
 	}
 
 	private void setParameter(PreparedStatement statement, Object... parameters) {
-		try {
-			for (int i = 0; i < parameters.length; i++) {
-				Object parameter = parameters[i];//パラメータを取る
-				int index = i + 1;//パラメータの位置をとる
-				if (parameter instanceof Long) {
-					statement.setLong(index, (Long) parameter);
-				} else if (parameter instanceof String) {
-					statement.setString(index, (String) parameter);
-				} else if (parameter instanceof Integer) {
-					statement.setInt(index, (Integer) parameter);
-				} else if (parameter instanceof Timestamp) {
-					statement.setTimestamp(index, (Timestamp) parameter);
-				}
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+
+		for (int i = 0; i < parameters.length; i++) {
+			Object parameter = parameters[i];//パラメータを取る
+			int index = i + 1;//パラメータの位置をとる
+			setParam_(statement, parameter, index);
+		}
+
+	}
+
+	private void setParameter2(PreparedStatement statement, List<Object> list) {
+		for (int i = 0; i < list.size(); i++) {
+			int index = i + 1;
+			Object p = list.get(i);
+			setParam_(statement, p, index);
 		}
 	}
+
+	private void setParam_(PreparedStatement statement, Object p, int index) {
+		try {
+			if (p instanceof String) {
+				statement.setString(index, (String) p);
+			} else if (p instanceof Integer) {
+				statement.setInt(index, (Integer) p);
+			} else if (p instanceof Long) {
+				statement.setLong(index, (Long) p);
+			}
+		} catch (SQLException e) {
+
+		}
+
+	}
+
+	@Override
+	public <T> List<T> query2(String sql, RowMapper<T> rowMapper, List<Object> list) {
+		List<T> results = new ArrayList<>();
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		try {
+			connection = getConnection();
+			statement = connection.prepareStatement(sql);
+			setParameter2(statement, list);//インプット（パラメータ）をセットする
+			logger.info(statement);
+			resultSet = statement.executeQuery();//SQLクエリーを実行する
+			while (resultSet.next()) {
+				results.add(rowMapper.mapRow(resultSet));//結果をマップして、リストに保存する
+			}
+			return results;
+		} catch (SQLException e) {
+			return null;
+		} finally {
+			try {
+				if (connection != null || statement != null || resultSet != null) {
+					connection.close();
+				}
+			} catch (SQLException e) {
+				return null;
+			}
+		}
+	}
+
 }
