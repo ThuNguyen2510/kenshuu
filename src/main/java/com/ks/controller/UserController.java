@@ -102,6 +102,7 @@ public class UserController extends HttpServlet {
 						viewLink = "/views/admin/create.jsp";
 					}
 				}
+				request.setAttribute("model", newUser);//入力したユーザ情報を返す
 
 			}
 
