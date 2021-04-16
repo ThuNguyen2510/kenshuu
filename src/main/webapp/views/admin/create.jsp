@@ -173,7 +173,7 @@ h3 {
 						</div>
 						<div class="form-group row" style="padding-top: 40px">
 							<div class="col-sm-5">
-								<button id="back" style="margin-left: 60%"
+								<button id="back" style="margin-left: 60%" type="button"
 									class="btn btn-secondary">戻る</button>
 							</div>
 							<div class="col-sm-5">
