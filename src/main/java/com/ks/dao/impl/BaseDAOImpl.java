@@ -136,9 +136,10 @@ public class BaseDAOImpl<T> implements BaseDAO<T> {
 	}
 
 	@Override
-	public void saveOrUpdate(String sql, Object... params) {
+	public boolean saveOrUpdate(String sql, Object... params) {
 		Connection connection = null;
 		PreparedStatement statement = null;
+		boolean flag=false;
 		try {
 			connection = getConnection();
 			connection.setAutoCommit(false);//コミットを呼ぶとき、データベースを変更する
@@ -147,6 +148,8 @@ public class BaseDAOImpl<T> implements BaseDAO<T> {
 			logger.info(statement);
 			statement.executeUpdate();//SQLクエリーを実行する
 			connection.commit();// データを変更する
+			flag=true;
+
 		} catch (SQLException e) {
 			if (connection != null) {
 				try {
@@ -164,6 +167,7 @@ public class BaseDAOImpl<T> implements BaseDAO<T> {
 				e_.printStackTrace();
 			}
 		}
+		return flag;
 
 	}
 

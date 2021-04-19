@@ -66,11 +66,10 @@ public class UserDAOImpl extends BaseDAOImpl<User> implements UserDAO {
 		newUser.setUpdateUserId(newUser.getCreateUserId());
 		newUser.setCreateDate(new Date().getTime() / 1000);
 		newUser.setUpdateDate(new Date().getTime() / 1000);
-		saveOrUpdate(sql.toString(), newUser.getUserId(), newUser.getPassword(), newUser.getFamilyName(),
+		return saveOrUpdate(sql.toString(), newUser.getUserId(), newUser.getPassword(), newUser.getFamilyName(),
 				newUser.getFirstName(), newUser.getAdmin(), newUser.getCreateUserId(),
 				newUser.getUpdateUserId(), newUser.getCreateDate(), newUser.getUpdateDate(), newUser.getAge(),
 				newUser.getAuthorityId(), newUser.getGenderId());
-		return true;
 	}
 
 	@Override
@@ -87,11 +86,10 @@ public class UserDAOImpl extends BaseDAOImpl<User> implements UserDAO {
 						+ "age=?,authority_id=?,gender_id=?,update_user_id=?,update_date=?"
 						+ "	WHERE user_id = ?");
 		updateUser.setUpdateDate(new Date().getTime() / 1000);
-		saveOrUpdate(sql.toString(), updateUser.getPassword(), updateUser.getFamilyName(), updateUser.getFirstName(),
+		return saveOrUpdate(sql.toString(), updateUser.getPassword(), updateUser.getFamilyName(), updateUser.getFirstName(),
 				updateUser.getAdmin(),
 				updateUser.getAge(), updateUser.getAuthorityId(), updateUser.getGenderId(),
 				updateUser.getUpdateUserId(), updateUser.getUpdateDate(), updateUser.getUserId());
-		return true;
 
 	}
 
