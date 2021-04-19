@@ -19,37 +19,35 @@ public class ValidateUser  {
 	}
 	public String validate(User user) {
 		String errors="";
-		if(isNullOrBlank(user.getUserId())!=true) {
+		if(isNullOrBlank(user.getUserId())) {
 			errors+="※ユーザーIDが未入力です。";
 		}else {
-			if(stringMoreThan(8,user.getUserId())!=true)
+			if(stringMoreThan(8,user.getUserId()))
 			errors+="ユーザーIDは8文字以下。"	;
 		}
 
-		if(isNullOrBlank(user.getPassword())!=true) {
+		if(isNullOrBlank(user.getPassword())) {
 			errors+="※パスワードが未入力です。";
 		}else {
-			if(stringMoreThan(8,user.getPassword())!=true)
+			if(stringMoreThan(8,user.getPassword()))
 			errors+="※パスワードは8文字以下。"	;
 		}
 
 
-		if(isNullOrBlank(user.getFamilyName())!=true) {
+		if(isNullOrBlank(user.getFamilyName())) {
 			errors+="※姓がが未入力です。";
 		}else {
-			if(stringMoreThan(10,user.getFamilyName())!=true)
+			if(stringMoreThan(10,user.getFamilyName()))
 			errors+="※姓は10文字以下"	;
 		}
 
 
-		if(isNullOrBlank(user.getFirstName())!=true) {
+		if(isNullOrBlank(user.getFirstName())) {
 			errors+="※名がが未入力です。";
 		}else {
-			if(stringMoreThan(10,user.getFirstName())!=true)
+			if(stringMoreThan(10,user.getFirstName()))
 			errors+="※名は10文字以下"	;
 		}
-
-
 		return errors;
 
 	}

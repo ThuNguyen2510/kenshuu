@@ -6,7 +6,7 @@
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>登録完了</title>
+<title>${message}</title>
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
 	rel="stylesheet" id="bootstrap-css">
@@ -29,11 +29,11 @@ h3 {
 	color: blue
 }
 </style>
-	<font style="padding: 30px;" size="8">登録完了</font>
+	<font style="padding: 30px;" size="8">${message}</font>
 
 	<div class="errorTxt">
 		<c:if test="${not empty message}">
-			<h3>${message}</h3>
+			<h3>${message}しました。</h3>
 		</c:if>
 	</div>
 	<div id="layoutSidenav_content">

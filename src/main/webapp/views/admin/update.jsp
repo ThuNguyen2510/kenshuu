@@ -6,7 +6,7 @@
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>登録</title>
+<title>更新</title>
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
 	rel="stylesheet" id="bootstrap-css">
@@ -23,7 +23,7 @@
 </head>
 
 <body>
-<style>
+	<style>
 .errorTxt {
 	min-height: 20px;
 }
@@ -45,8 +45,8 @@ h3 {
 		<main>
 		<div class="container-fluid" style="margin-top: 100px">
 			<div class="card mb-4" style="padding-left: 10%">
-				<form action="<c:url value='/admin-user'/>"
-					name="registration" method="post">
+				<form action="<c:url value='/admin-user'/>" name="registration"
+					method="post">
 					<div class="card-body">
 						<div class="form-group row">
 							<div class="col-md-6">
@@ -55,8 +55,7 @@ h3 {
 										<strong>ユーザID:</strong>
 									</div>
 									<div class="col-md-8">
-										<input id="userId" type="text" value="${model.userId}"
-											name="userId" />
+										<label>${model.userId}</label>
 									</div>
 								</div>
 							</div>
@@ -128,7 +127,8 @@ h3 {
 										<strong>年齢:</strong>
 									</div>
 									<div class="col-md-8">
-										<input id="age" name="age" type="text"  value="${model.age}"/>
+										<input id="age" name="age" type="text"
+											<c:if test="${model.age!=0}">value="${model.age}"</c:if> />
 									</div>
 								</div>
 							</div>
@@ -164,12 +164,20 @@ h3 {
 										<strong>管理者:</strong>
 									</div>
 									<div class="col-md-8">
-										<input type="checkbox" id="admin"
-											style="width: 20px; height: 20px;" value="${model.admin}" name="admin">
+
+										<c:if test="${model.admin==1}">
+											<input type="checkbox" style="width: 20px; height: 20px;"
+												name="admin" id="admin" checked="checked">
+										</c:if>
+										<c:if test="${model.admin==0}">
+											<input type="checkbox" style="width: 20px; height: 20px;"
+												name="admin" id="admin">
+										</c:if>
 									</div>
 								</div>
 
 							</div>
+							<input type="hidden" name="userId" value="${model.userId }" />
 						</div>
 						<div class="form-group row" style="padding-top: 40px">
 							<div class="col-sm-5">
@@ -177,9 +185,8 @@ h3 {
 									class="btn btn-secondary">戻る</button>
 							</div>
 							<div class="col-sm-5">
-								<input type="hidden" name="action" value="create">
-								<button id="create" type="submit"
-									class="btn btn-primary">登録</button>
+								<input type="hidden" name="action" value="update">
+								<button id="create" type="submit" class="btn btn-primary">更新</button>
 							</div>
 						</div>
 					</div>
@@ -192,11 +199,11 @@ h3 {
 		$("#back").click(function() {
 			window.location.href = "/kenshuu/admin-user?action=get";
 		});
-		$("input[type='checkbox']").on('change', function() {
+		/* $("input[type='checkbox']").on('change', function() {
 			$(this).val(this.checked ? "1" : "0");
-		})
+		}) */
 		$("#create").click(function() {
-			if (confirm("登録してよろしいですか？") == false)
+			if (confirm("更新してよろしいですか？") == false)
 				return false;
 
 		});

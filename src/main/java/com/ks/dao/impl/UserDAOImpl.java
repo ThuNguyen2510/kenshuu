@@ -66,7 +66,7 @@ public class UserDAOImpl extends BaseDAOImpl<User> implements UserDAO {
 		newUser.setUpdateUserId(newUser.getCreateUserId());
 		newUser.setCreateDate(new Date().getTime() / 1000);
 		newUser.setUpdateDate(new Date().getTime() / 1000);
-		create(sql.toString(), newUser.getUserId(), newUser.getPassword(), newUser.getFamilyName(),
+		saveOrUpdate(sql.toString(), newUser.getUserId(), newUser.getPassword(), newUser.getFamilyName(),
 				newUser.getFirstName(), newUser.getAdmin(), newUser.getCreateUserId(),
 				newUser.getUpdateUserId(), newUser.getCreateDate(), newUser.getUpdateDate(), newUser.getAge(),
 				newUser.getAuthorityId(), newUser.getGenderId());
@@ -77,7 +77,22 @@ public class UserDAOImpl extends BaseDAOImpl<User> implements UserDAO {
 	public User getUser(String userId) {
 		StringBuilder sql = new StringBuilder("SELECT * FROM public.mst_user WHERE user_id = ? ");
 		List<User> users = query(sql.toString(), new UserMapper(), userId);//　SQLクエリーを実行して、リストに保存する
-		return users.size()==0? null: users.get(0);
+		return users.size() == 0 ? null : users.get(0);
+	}
+
+	@Override
+	public boolean updateUser(User updateUser) {
+		StringBuilder sql = new StringBuilder(
+				"UPDATE public.mst_user SET password = ? ,family_name=?,first_name=?,admin=?,"
+						+ "age=?,authority_id=?,gender_id=?,update_user_id=?,update_date=?"
+						+ "	WHERE user_id = ?");
+		updateUser.setUpdateDate(new Date().getTime() / 1000);
+		saveOrUpdate(sql.toString(), updateUser.getPassword(), updateUser.getFamilyName(), updateUser.getFirstName(),
+				updateUser.getAdmin(),
+				updateUser.getAge(), updateUser.getAuthorityId(), updateUser.getGenderId(),
+				updateUser.getUpdateUserId(), updateUser.getUpdateDate(), updateUser.getUserId());
+		return true;
+
 	}
 
 }

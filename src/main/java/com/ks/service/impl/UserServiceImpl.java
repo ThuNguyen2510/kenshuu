@@ -42,4 +42,10 @@ public class UserServiceImpl implements UserService {
 		return userDAO.getUser(userId);
 	}
 
+	@Override
+	public boolean updateUser(User updateUser) {
+		// TODO 自動生成されたメソッド・スタブ
+		return userDAO.updateUser(updateUser);
+	}
+
 }

@@ -60,6 +60,18 @@ public class UserController extends HttpServlet {
 				request.setAttribute("listRole", listRole);
 				request.setAttribute("model", new User());
 			}
+			if (action.equals("update")) {
+				logger.info("UPDATE USER");
+				viewLink = "/views/admin/update.jsp";
+				List<Gender> listGender = genderService.getListGender();
+				List<Role> listRole = roleService.getListRole();
+				String userId = request.getParameter("userId");
+				User user = userService.getUser(userId);
+				request.setAttribute("listGender", listGender);
+				request.setAttribute("listRole", listRole);
+				request.setAttribute("model", user);
+			}
+
 		}
 
 		RequestDispatcher rd = request.getRequestDispatcher(viewLink);
@@ -90,12 +102,13 @@ public class UserController extends HttpServlet {
 				logger.info("SAVE NEW USER");
 				ValidateUser validator = new ValidateUser();
 				String message = validator.validate(newUser);//ユーザのフィールドをバリデーションチェック、エラーをセットする
-				if (message.equals("")) {
+				if (message.equals("") == false) {
 					request.setAttribute("message", message);
+					viewLink = "/views/admin/create.jsp";
 				} else {
 					boolean rs = userService.createUser(newUser);//登録する
 					if (rs) {//成功場合
-						request.setAttribute("message", "登録完了しました。");
+						request.setAttribute("message", "登録完了");
 						viewLink = "/views/admin/success.jsp";
 					} else {//失敗場合/
 						request.setAttribute("message", "※ ユーザIDが重複しています。");
@@ -104,6 +117,26 @@ public class UserController extends HttpServlet {
 				}
 				request.setAttribute("model", newUser);//入力したユーザ情報を返す
 
+			}
+			if (action.equals("update")) {
+				logger.info("SAVE UPDATE USER");
+				User updateUser = mapForm(request);
+				ValidateUser validator = new ValidateUser();
+				String message = validator.validate(updateUser);//ユーザのフィールドをバリデーションチェック、エラーをセットする
+				if (message.equals("") == false) {
+					request.setAttribute("message", message);//更新失敗する
+					viewLink = "/views/admin/update.jsp";
+				} else {
+					boolean rs = userService.updateUser(updateUser);//更新する
+					if (rs) {//成功場合
+						request.setAttribute("message", "更新完了");
+						viewLink = "/views/admin/success.jsp";
+					} else {//失敗場合/
+						request.setAttribute("message", "※ 更新失敗しました。");
+						viewLink = "/views/admin/update.jsp";
+					}
+				}
+				request.setAttribute("model", updateUser);//入力したユーザ情報を返す
 			}
 
 		}
@@ -124,8 +157,11 @@ public class UserController extends HttpServlet {
 		} else
 			newUser.setAdmin(1);
 		newUser.setCreateUserId(request.getSession().getAttribute("currentUser").toString());
-		if (request.getAttribute("age") == null) {
-			newUser.setAge(-1);
+		newUser.setUpdateUserId(request.getSession().getAttribute("currentUser").toString());
+		if (request.getParameter("age")==null || request.getParameter("age").equals("")==true) {
+			newUser.setAge(-1);//年齢未入力
+		}else {
+			newUser.setAge(Integer.valueOf(request.getParameter("age")));
 		}
 		return newUser;
 	}

@@ -111,7 +111,7 @@
 								<th>役職</th>
 								<th>
 									<form action="<c:url value='/admin-user'/>" method="get">
-									<input type="hidden" value="create" name="action"/>
+										<input type="hidden" value="create" name="action" />
 										<button style="width: 100%" class="btn btn-primary">登録</button>
 									</form>
 								</th>
@@ -131,8 +131,15 @@
 											<span class="fa fa-star"></span>
 										</c:if>${item.role.authorityName}</td>
 									<td>
-										<button style="width: 45%" class="btn btn-warning">変更</button>
-										<button style="width: 45%" class="btn btn-danger">削除</button>
+
+										<button style="width: 45%"
+											onclick="window.location.href='/kenshuu/admin-user?action=update&userId=${item.userId}'"
+											class="btn btn-warning">変更</button>
+
+										<button style="width: 45%"
+											onclick="window.location.href='/kenshuu/admin-user?action=delete&userId=${item.userId}'"
+											class="btn btn-danger">削除</button>
+
 									</td>
 								</tr>
 								<c:set var="i" value="${i+1}" />

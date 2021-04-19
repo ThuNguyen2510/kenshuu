@@ -10,4 +10,5 @@ public interface UserDAO {
 	List<User> search(String familyName, String firstName, int authorityId);
 	boolean createUser(User newUser);
 	User getUser(String userId);
+	boolean updateUser(User updateUser);
 }

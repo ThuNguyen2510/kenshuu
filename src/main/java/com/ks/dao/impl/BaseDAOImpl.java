@@ -97,7 +97,7 @@ public class BaseDAOImpl<T> implements BaseDAO<T> {
 					statement.setInt(index, (Integer) p);
 			} else if (p instanceof Long) {
 				statement.setLong(index, (Long) p);
-			}else if(p==null) {
+			} else if (p == null) {
 				statement.setObject(index, null);
 			}
 		} catch (SQLException e) {
@@ -136,7 +136,7 @@ public class BaseDAOImpl<T> implements BaseDAO<T> {
 	}
 
 	@Override
-	public void create(String sql, Object... params) {
+	public void saveOrUpdate(String sql, Object... params) {
 		Connection connection = null;
 		PreparedStatement statement = null;
 		try {
