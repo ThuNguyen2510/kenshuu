@@ -12,7 +12,7 @@
 </form>
 <!-- Navbar-->
 <ul class="navbar-nav ml-auto ml-md-0">
-	<li class="nav-item "><a class="nav-link" href="">役職別集計</a></li>
+	<li class="nav-item "><a class="nav-link" href="<c:url value='/total'/>" >役職別集計</a></li>
 	<li class="nav-item "><a class="nav-link" href="">ログアウト</a></li>
 </ul>
 </nav>

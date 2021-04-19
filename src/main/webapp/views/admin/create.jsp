@@ -45,7 +45,7 @@ h3 {
 		<main>
 		<div class="container-fluid" style="margin-top: 100px">
 			<div class="card mb-4" style="padding-left: 10%">
-				<form action="<c:url value='/admin-user'/>" method="post"
+				<form action="<c:url value='/admin-user'/>"
 					name="registration" method="post">
 					<div class="card-body">
 						<div class="form-group row">
@@ -178,7 +178,7 @@ h3 {
 							</div>
 							<div class="col-sm-5">
 								<input type="hidden" name="action" value="create">
-								<button id="create" name="action" type="submit"
+								<button id="create" type="submit"
 									class="btn btn-primary">登録</button>
 							</div>
 						</div>
