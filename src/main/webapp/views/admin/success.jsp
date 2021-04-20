@@ -26,7 +26,7 @@
 	<style>
 h3 {
 	padding-left: 15%;
-	color: blue
+	padding-top:5%
 }
 </style>
 	<font style="padding: 30px;" size="8">${message}</font>

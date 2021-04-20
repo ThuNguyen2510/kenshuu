@@ -19,7 +19,10 @@ import com.ks.service.impl.TotalServiceImpl;
 @WebServlet("/total")
 public class TotalController extends HttpServlet {
 	private static final Logger logger = Logger.getLogger(TotalController.class);
+	private static final long serialVersionUID = 1L;
+
 	private TotalService totalService;
+
 	public TotalController() {
 		totalService = new TotalServiceImpl();
 	}
@@ -28,7 +31,7 @@ public class TotalController extends HttpServlet {
 			throws ServletException, IOException {
 		logger.info("GET SUMMARY");
 		RequestDispatcher rd = request.getRequestDispatcher("/views/admin/total.jsp");
-		List<Count> listCount = totalService.getSummary() ;
+		List<Count> listCount = totalService.getSummary();
 		request.setAttribute("listCount", listCount);
 		rd.forward(request, response);
 	}

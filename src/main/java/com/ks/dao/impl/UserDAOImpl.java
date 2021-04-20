@@ -26,7 +26,7 @@ public class UserDAOImpl extends BaseDAOImpl<User> implements UserDAO {
 	public List<User> getListUser() {
 		StringBuilder sql = new StringBuilder("SELECT * FROM public.mst_user as u");
 		sql.append(" LEFT JOIN public.mst_role USING (authority_id) ");//　役職テーブルと　LEFT JOIN
-		sql.append("LEFT JOIN public.mst_gender  USING (gender_id)");//　性別テーブルと　　LEFT JOIN
+		sql.append("LEFT JOIN public.mst_gender  USING (gender_id) ORDER BY u.create_date DESC" );//　性別テーブルと　　LEFT JOIN
 		List<User> list = query(sql.toString(), new UserMapper());//　SQLクエリーを実行して、リストに保存する
 		return list;
 	}

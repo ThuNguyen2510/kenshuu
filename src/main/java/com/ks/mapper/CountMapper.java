@@ -12,6 +12,7 @@ public class CountMapper implements RowMapper<Count> {
 		Count count = new Count();
 		try {
 			count.setAuthorityName(rs.getString("authority_name"));
+			count.setAuthorityName(rs.getString("authority_name"));
 			count.setFemale(rs.getInt("femaleCount"));
 			count.setMale(rs.getInt("maleCount"));
 			count.setNullAge(rs.getInt("nullAgeCount"));

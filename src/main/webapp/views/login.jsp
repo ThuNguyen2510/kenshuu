@@ -17,52 +17,54 @@
 	rel="stylesheet" type="text/css" media="all" />
 </head>
 <body style="background: aliceblue;">
-	<div class="container">
 
 
-		<div class="row" style="padding-top: 10px;">
-			<font size="8">ログイン</font>
-		</div>
-
-
-		<div class="center-div">
-			<div id="message">
-				<c:if test="${not empty message}">
-					<div class="alert alert-${alert}"
-						style="font-size: 25px; padding-left: 20%">${message}</div>
-				</c:if>
-			</div>
-			<form action="<c:url value='/login'/>" method="post">
-				<div class="form-group row">
-					<div class="col-md-5" id="userLabel">
-						<span>ユーザID:</span>
-					</div>
-					<div class="col-md-7">
-						<input type="text" name="userId">
-					</div>
-
-				</div>
-
-				<div class="form-group row">
-					<div class="col-md-5" id="passLabel">
-						<span>パスワード:</span>
-					</div>
-					<div class="col-md-7">
-						<input type="password" name="password">
-					</div>
-				</div>
-
-				<input type="hidden" value="login" name="action" />
-				<div class="row" id="butSubmit">
-					<button class="btn btn-primary" type="submit"
-						style="border-radius: 10px">ログイン</button>
-				</div>
-
-			</form>
-		</div>
-
-
+	<div class="row" style="padding-top: 10px; padding-left: 5%">
+		<font size="8">ログイン</font>
 	</div>
 
+
+	<div class="center-div">
+		<div id="message">
+			<c:if test="${not empty message}">
+				<div class="alert alert-${alert}"
+					style="font-size: 30px; padding-left: 25%">${message}</div>
+			</c:if>
+		</div>
+		<form action="<c:url value='/login'/>" method="post">
+			<div class="form-group row">
+				<div class="col-md-5" id="userLabel">
+					<strong>ユーザID:</strong>
+				</div>
+				<div class="col-md-7">
+					<input class="txtBox" type="text" name="userId">
+				</div>
+
+			</div>
+
+			<div class="form-group row">
+				<div class="col-md-5" id="passLabel">
+					<strong>パスワード:</strong>
+				</div>
+				<div class="col-md-7">
+					<input class="txtBox" type="password" name="password">
+				</div>
+			</div>
+
+			<input type="hidden" value="login" name="action" />
+			<div class="row" id="butSubmit">
+				<button class="btn btn-primary" type="submit"
+					style="border-radius: 10px; width: 15%; margin-top: 30px;"；；">ログイン</button>
+			</div>
+
+		</form>
+	</div>
+
+	<style>
+.txtBox {
+	height: 40px;
+	width: 40%;
+}
+</style>
 </body>
 </html>
