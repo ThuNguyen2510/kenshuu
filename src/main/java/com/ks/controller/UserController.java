@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
@@ -71,6 +72,13 @@ public class UserController extends HttpServlet {
 				request.setAttribute("listRole", listRole);
 				request.setAttribute("model", user);
 			}
+			if (action.equals("delete")) {
+				logger.info("DELETE USER");
+				String userId = request.getParameter("userId");
+				User deleteUser = userService.getUser(userId);
+				request.setAttribute("model", deleteUser);
+				viewLink = "/views/admin/delete.jsp";
+			}
 
 		}
 
@@ -81,7 +89,6 @@ public class UserController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String action = request.getParameter("action");// アクションタイプを取る
-		logger.info(action);
 		String viewLink = "";//ビューのリングを保存する
 		if (action != null) {
 			if (action.equals("search")) {
@@ -138,7 +145,32 @@ public class UserController extends HttpServlet {
 				}
 				request.setAttribute("model", updateUser);//入力したユーザ情報を返す
 			}
+			if (action.equals("delete")) {
+				logger.info("DELETE USER");
+				String userId = request.getParameter("userId");
+				HttpSession session = request.getSession();
+				if (userId.equals(session.getAttribute("currentUser"))) {//削除したいユーザはログインしている場合
+					String message = "※ログインしているユーザなので、削除できません。";
+					request.setAttribute("message", message);
+					User deleteUser = userService.getUser(userId);
+					request.setAttribute("model", deleteUser);
+					viewLink = "/views/admin/delete.jsp";
 
+				} else {
+					boolean rs = userService.deleteUser(userId);
+					if (rs) {
+						viewLink = "/views/admin/success.jsp";
+						request.setAttribute("message", "削除完了");//成功場合
+					} else {
+						String message = "※削除失敗しました。";//失敗場合
+						request.setAttribute("message", message);
+						User deleteUser = userService.getUser(userId);
+						request.setAttribute("model", deleteUser);
+						viewLink = "/views/admin/delete.jsp";
+					}
+				}
+
+			}
 		}
 		RequestDispatcher rd = request.getRequestDispatcher(viewLink);
 		rd.forward(request, response);
@@ -158,9 +190,9 @@ public class UserController extends HttpServlet {
 			newUser.setAdmin(1);
 		newUser.setCreateUserId(request.getSession().getAttribute("currentUser").toString());
 		newUser.setUpdateUserId(request.getSession().getAttribute("currentUser").toString());
-		if (request.getParameter("age")==null || request.getParameter("age").equals("")==true) {
+		if (request.getParameter("age") == null || request.getParameter("age").equals("") == true) {
 			newUser.setAge(-1);//年齢未入力
-		}else {
+		} else {
 			newUser.setAge(Integer.valueOf(request.getParameter("age")));
 		}
 		return newUser;

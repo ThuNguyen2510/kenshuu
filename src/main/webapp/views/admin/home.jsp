@@ -124,7 +124,7 @@
 								<tr>
 									<td style="text-align: right">${i}</td>
 									<td>${item.userId}</td>
-									<td>${item.familyName}${item.firstName}</td>
+									<td>${item.familyName}&nbsp;${item.firstName}</td>
 									<td>${item.gender.genderName}</td>
 									<td style="text-align: right">${item.age}</td>
 									<td><c:if test="${item.admin==1}">

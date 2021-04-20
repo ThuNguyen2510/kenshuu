@@ -93,4 +93,11 @@ public class UserDAOImpl extends BaseDAOImpl<User> implements UserDAO {
 
 	}
 
+	@Override
+	public boolean deleteUser(String userId) {
+		if(getUser(userId)==null) return false;
+		StringBuilder sql= new StringBuilder("DELETE FROM public.mst_user WHERE user_id = ?");
+		return saveOrUpdate(sql.toString(), userId) ;
+	}
+
 }

@@ -11,4 +11,5 @@ public interface UserService {
 	boolean createUser(User newUser);
 	User getUser(String userId);
 	boolean updateUser(User updateUser);
+	boolean deleteUser(String userId);
 }

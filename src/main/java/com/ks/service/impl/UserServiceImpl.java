@@ -38,14 +38,17 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User getUser(String userId) {
-		// TODO 自動生成されたメソッド・スタブ
 		return userDAO.getUser(userId);
 	}
 
 	@Override
 	public boolean updateUser(User updateUser) {
-		// TODO 自動生成されたメソッド・スタブ
 		return userDAO.updateUser(updateUser);
+	}
+
+	@Override
+	public boolean deleteUser(String userId) {
+		return userDAO.deleteUser(userId);
 	}
 
 }
