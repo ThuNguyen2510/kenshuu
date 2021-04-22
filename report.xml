@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="Shift_JIS" ?>
+<openfunxion version="4.0" language="iText">
+	<openfunxion_property classname="jp.co.nobworks.openfunxion4.core.DummyPrintProperty">
+	</openfunxion_property>
+	<openfunxion_common
+		value_count="101"
+		work_file="report.pdf"
+		work_command="C:\Program Files\Adobe\Acrobat 6.0\Reader\AcroRd32.exe %pdf_file"
+		print_command=""
+		external_font_file0="C:\WINNT\Fonts\CODE39.TTF"
+		external_font_name0="Agency FB"
+		external_font_file1=""
+		external_font_name1="Agency FB"
+		external_font_file2=""
+		external_font_name2="Agency FB"
+		external_font_file3=""
+		external_font_name3="Agency FB"
+		external_font_file4=""
+		external_font_name4="Agency FB"
+		external_font_file5=""
+		external_font_name5="Agency FB"
+		external_font_file6=""
+		external_font_name6="Agency FB"
+		external_font_file7=""
+		external_font_name7="Agency FB"
+		external_font_file8=""
+		external_font_name8="Agency FB"
+		external_font_file9=""
+		external_font_name9="Agency FB"
+	>
+		<openfunxion_page size="A4" orientation="PORTRAIT" zoom="1" mouseX="6" mouseY="6" grid="false" grid_width="6" grid_height="12" not_disp_red="200" not_disp_green="200" not_disp_blue="200" not_print_red="180" not_print_green="180" not_print_blue="180"></openfunxion_page>
+	</openfunxion_common>
+	<openfunxion_blocklayout parent="_root" id="body_block" name="block_23" x1="72" y1="264" x2="300" y2="378" memo="" display_children="true" display="true" output="true">
+		<openfunxion_box parent="body_block" id="header_box" name="header_box" x1="12" y1="132" x2="582" y2="156" thickness="1.0" red="0" green="0" blue="0" color_transparent="255" fill_enable="false" fill_color_red="0" fill_color_green="0" fill_color_blue="0" fill_color_transparent="255" dash_enable="false" dash_unitson="0.0" dash_unitsoff="0.0" dash_phase="0.0" memo="" display="true" output="true">
+		</openfunxion_box>
+		<openfunxion_text parent="body_block" id="header_1" name="header_1" x1="36" y1="150" message="No" horizontal_scale="1.0" font="HeiseiMin-W3" font_encoding="UniJIS-UCS2-HW-H" font_size="15" background_enable="false" background_red="0" background_green="0" background_blue="0" size_outline="false" red="0" green="0" blue="0" memo="" display="true" output="true"
+		 underline="false" underline_thick="0.0" underline_ypos="0.0" underline_red="0" underline_green="0" underline_blue="0" bold="false" italic="false" outline="false" strike="false" external_font_enable="false" external_font_file="" external_font_name="">
+		</openfunxion_text>
+		<openfunxion_text parent="body_block" id="header_2" name="header_2" x1="96" y1="150" message="ユーザーID" horizontal_scale="1.0" font="HeiseiMin-W3" font_encoding="UniJIS-UCS2-HW-H" font_size="15" background_enable="false" background_red="0" background_green="0" background_blue="0" size_outline="false" red="0" green="0" blue="0" memo="" display="true" output="true"
+		 underline="false" underline_thick="0.0" underline_ypos="0.0" underline_red="0" underline_green="0" underline_blue="0" bold="false" italic="false" outline="false" strike="false" external_font_enable="false" external_font_file="" external_font_name="">
+		</openfunxion_text>
+		<openfunxion_text parent="body_block" id="text_14" name="text_14" x1="18" y1="108" message="役職:" horizontal_scale="1.0" font="HeiseiMin-W3" font_encoding="UniJIS-UCS2-HW-H" font_size="18" background_enable="false" background_red="0" background_green="0" background_blue="0" size_outline="false" red="0" green="0" blue="0" memo="" display="true" output="true"
+		 underline="false" underline_thick="0.0" underline_ypos="0.0" underline_red="0" underline_green="0" underline_blue="0" bold="false" italic="false" outline="false" strike="false" external_font_enable="false" external_font_file="C:\WINNT\Fonts\CODE39.TTF" external_font_name=".Vn3DH">
+		</openfunxion_text>
+		<openfunxion_box parent="body_block" id="out_box" name="out_box" x1="12" y1="132" x2="582" y2="793" thickness="1.0" red="0" green="0" blue="0" color_transparent="255" fill_enable="false" fill_color_red="0" fill_color_green="0" fill_color_blue="0" fill_color_transparent="255" dash_enable="false" dash_unitson="0.0" dash_unitsoff="0.0" dash_phase="0.0" memo="" display="true" output="true">
+		</openfunxion_box>
+		<openfunxion_text parent="body_block" id="header_3" name="header_3" x1="216" y1="150" message="氏名" horizontal_scale="1.0" font="HeiseiMin-W3" font_encoding="UniJIS-UCS2-HW-H" font_size="15" background_enable="false" background_red="0" background_green="0" background_blue="0" size_outline="false" red="0" green="0" blue="0" memo="" display="true" output="true"
+		 underline="false" underline_thick="0.0" underline_ypos="0.0" underline_red="0" underline_green="0" underline_blue="0" bold="false" italic="false" outline="false" strike="false" external_font_enable="false" external_font_file="C:\WINNT\Fonts\CODE39.TTF" external_font_name=".Vn3DH">
+		</openfunxion_text>
+		<openfunxion_text parent="body_block" id="header_5" name="header_5" x1="528" y1="150" message="年齢" horizontal_scale="1.0" font="HeiseiMin-W3" font_encoding="UniJIS-UCS2-HW-H" font_size="15" background_enable="false" background_red="0" background_green="0" background_blue="0" size_outline="false" red="0" green="0" blue="0" memo="" display="true" output="true"
+		 underline="false" underline_thick="0.0" underline_ypos="0.0" underline_red="0" underline_green="0" underline_blue="0" bold="false" italic="false" outline="false" strike="false" external_font_enable="false" external_font_file="C:\WINNT\Fonts\CODE39.TTF" external_font_name=".Vn3DH">
+		</openfunxion_text>
+		<openfunxion_text parent="body_block" id="header_4" name="header_4" x1="456" y1="150" message="性別" horizontal_scale="1.0" font="HeiseiMin-W3" font_encoding="UniJIS-UCS2-HW-H" font_size="15" background_enable="false" background_red="0" background_green="0" background_blue="0" size_outline="false" red="0" green="0" blue="0" memo="" display="true" output="true"
+		 underline="false" underline_thick="0.0" underline_ypos="0.0" underline_red="0" underline_green="0" underline_blue="0" bold="false" italic="false" outline="false" strike="false" external_font_enable="false" external_font_file="C:\WINNT\Fonts\CODE39.TTF" external_font_name=".Vn3DH">
+		</openfunxion_text>
+		<openfunxion_text parent="body_block" id="text_1" name="text_1" x1="24" y1="48" message="ユーザーリスト" horizontal_scale="1.0" font="HeiseiMin-W3" font_encoding="UniJIS-UCS2-HW-H" font_size="20" background_enable="false" background_red="0" background_green="0" background_blue="0" size_outline="false" red="0" green="0" blue="0" memo="" display="true" output="true"
+		 underline="false" underline_thick="0.0" underline_ypos="0.0" underline_red="0" underline_green="0" underline_blue="0" bold="true" italic="false" outline="false" strike="false" external_font_enable="false" external_font_file="C:\WINNT\Fonts\CODE39.TTF" external_font_name="Agency FB">
+		</openfunxion_text>
+		<openfunxion_text parent="body_block" id="text_2" name="text_2" x1="330" y1="54" message="出力日時" horizontal_scale="1.0" font="HeiseiMin-W3" font_encoding="UniJIS-UCS2-HW-H" font_size="16" background_enable="false" background_red="0" background_green="0" background_blue="0" size_outline="false" red="0" green="0" blue="0" memo="" display="true" output="true"
+		 underline="false" underline_thick="0.0" underline_ypos="0.0" underline_red="0" underline_green="0" underline_blue="0" bold="false" italic="false" outline="false" strike="false" external_font_enable="false" external_font_file="C:\WINNT\Fonts\CODE39.TTF" external_font_name="Agency FB">
+		</openfunxion_text>
+	</openfunxion_blocklayout>
+	<openfunxion_blocklayout parent="_root" id="data_block" name="block_24" x1="72" y1="498" x2="300" y2="612" memo="" display_children="true" display="true" output="true">
+		<openfunxion_line parent="data_block" id="row_line" name="row_line" x1="12" y1="192" x2="582" y2="192" thickness="1.0" dash_enable="false" dash_unitson="0.0" dash_unitsoff="0.0" dash_phase="0.0" red="0" green="0" blue="0" memo="" display="true" output="true">
+		</openfunxion_line>
+		<openfunxion_box parent="data_block" id="reverse_row" name="box_2" x1="12" y1="156" x2="582" y2="192" thickness="1.0" red="0" green="0" blue="0" color_transparent="255" fill_enable="false" fill_color_red="0" fill_color_green="0" fill_color_blue="0" fill_color_transparent="255" dash_enable="false" dash_unitson="0.0" dash_unitsoff="0.0" dash_phase="0.0" memo="" display="true" output="true">
+		</openfunxion_box>
+		<openfunxion_text parent="data_block" id="index" name="index" x1="36" y1="180" message="999" horizontal_scale="1.0" font="HeiseiMin-W3" font_encoding="UniJIS-UCS2-HW-H" font_size="12" background_enable="false" background_red="0" background_green="0" background_blue="0" size_outline="false" red="0" green="0" blue="0" memo="" display="true" output="true"
+		 underline="false" underline_thick="0.0" underline_ypos="0.0" underline_red="0" underline_green="0" underline_blue="0" bold="false" italic="false" outline="false" strike="false" external_font_enable="false" external_font_file="C:\WINNT\Fonts\CODE39.TTF" external_font_name="Agency FB">
+		</openfunxion_text>
+		<openfunxion_text parent="data_block" id="user_id" name="user_id" x1="96" y1="180" message="NNNNNNNN" horizontal_scale="1.0" font="HeiseiMin-W3" font_encoding="UniJIS-UCS2-HW-H" font_size="12" background_enable="false" background_red="0" background_green="0" background_blue="0" size_outline="false" red="0" green="0" blue="0" memo="" display="true" output="true"
+		 underline="false" underline_thick="0.0" underline_ypos="0.0" underline_red="0" underline_green="0" underline_blue="0" bold="false" italic="false" outline="false" strike="false" external_font_enable="false" external_font_file="C:\WINNT\Fonts\CODE39.TTF" external_font_name="Agency FB">
+		</openfunxion_text>
+		<openfunxion_text parent="data_block" id="name" name="name" x1="216" y1="180" message="NNNNNNNNNNNNNNNNNNN" horizontal_scale="1.0" font="HeiseiMin-W3" font_encoding="UniJIS-UCS2-HW-H" font_size="12" background_enable="false" background_red="0" background_green="0" background_blue="0" size_outline="false" red="0" green="0" blue="0" memo="" display="true" output="true"
+		 underline="false" underline_thick="0.0" underline_ypos="0.0" underline_red="0" underline_green="0" underline_blue="0" bold="false" italic="false" outline="false" strike="false" external_font_enable="false" external_font_file="C:\WINNT\Fonts\CODE39.TTF" external_font_name="Agency FB">
+		</openfunxion_text>
+		<openfunxion_text parent="data_block" id="gender" name="gender" x1="462" y1="180" message="NN" horizontal_scale="1.0" font="HeiseiMin-W3" font_encoding="UniJIS-UCS2-HW-H" font_size="12" background_enable="false" background_red="0" background_green="0" background_blue="0" size_outline="false" red="0" green="0" blue="0" memo="" display="true" output="true"
+		 underline="false" underline_thick="0.0" underline_ypos="0.0" underline_red="0" underline_green="0" underline_blue="0" bold="false" italic="false" outline="false" strike="false" external_font_enable="false" external_font_file="C:\WINNT\Fonts\CODE39.TTF" external_font_name="Agency FB">
+		</openfunxion_text>
+		<openfunxion_text parent="data_block" id="age" name="age" x1="534" y1="180" message="999" horizontal_scale="1.0" font="HeiseiMin-W3" font_encoding="UniJIS-UCS2-HW-H" font_size="12" background_enable="false" background_red="0" background_green="0" background_blue="0" size_outline="false" red="0" green="0" blue="0" memo="" display="true" output="true"
+		 underline="false" underline_thick="0.0" underline_ypos="0.0" underline_red="0" underline_green="0" underline_blue="0" bold="false" italic="false" outline="false" strike="false" external_font_enable="false" external_font_file="C:\WINNT\Fonts\CODE39.TTF" external_font_name="Agency FB">
+		</openfunxion_text>
+	</openfunxion_blocklayout>
+	<openfunxion_text parent="_root" id="authority_name" name="text_3" x1="78" y1="108" message="NNNNNNNNNNNNNNNNNNN" horizontal_scale="1.0" font="HeiseiMin-W3" font_encoding="UniJIS-UCS2-HW-H" font_size="18" background_enable="false" background_red="0" background_green="0" background_blue="0" size_outline="false" red="0" green="0" blue="0" memo="" display="true" output="true"
+	 underline="false" underline_thick="0.0" underline_ypos="0.0" underline_red="0" underline_green="0" underline_blue="0" bold="false" italic="false" outline="false" strike="false" external_font_enable="false" external_font_file="C:\WINNT\Fonts\CODE39.TTF" external_font_name="Agency FB">
+	</openfunxion_text>
+	<openfunxion_text parent="_root" id="create_date" name="text_12" x1="414" y1="54" message="YYYY/MM/DD　HH:MM:SS" horizontal_scale="1.0" font="HeiseiMin-W3" font_encoding="UniJIS-UCS2-HW-H" font_size="16" background_enable="false" background_red="0" background_green="0" background_blue="0" size_outline="false" red="0" green="0" blue="0" memo="" display="true" output="true"
+	 underline="false" underline_thick="0.0" underline_ypos="0.0" underline_red="0" underline_green="0" underline_blue="0" bold="false" italic="false" outline="false" strike="false" external_font_enable="false" external_font_file="C:\WINNT\Fonts\CODE39.TTF" external_font_name="Agency FB">
+	</openfunxion_text>
+	<openfunxion_text parent="_root" id="page" name="text_4" x1="444" y1="84" message="PAGE:  (ZZ9/ZZ9)" horizontal_scale="1.0" font="HeiseiMin-W3" font_encoding="UniJIS-UCS2-HW-H" font_size="16" background_enable="false" background_red="0" background_green="0" background_blue="0" size_outline="false" red="0" green="0" blue="0" memo="" display="true" output="true"
+	 underline="false" underline_thick="0.0" underline_ypos="0.0" underline_red="0" underline_green="0" underline_blue="0" bold="false" italic="false" outline="false" strike="false" external_font_enable="false" external_font_file="C:\WINNT\Fonts\CODE39.TTF" external_font_name="Agency FB">
+	</openfunxion_text>
+</openfunxion>

@@ -29,7 +29,7 @@
 		<main>
 		<div class="container-fluid" style="margin-top: 20px">
 			<div class="card mb-4">
-				<form action="<c:url value='/admin-user'/>" method="post">
+				<form method="post" id="searchListForm">
 					<div class="card-body">
 						<div class="form-group row">
 							<div class="col-md-6">
@@ -67,22 +67,19 @@
 												<option value="${item.authorityId}">
 													${item.authorityName}</option>
 											</c:forEach>
-										</select> </select>
+										</select>
 									</div>
 								</div>
 							</div>
 							<div class="col-md-6">
 								<input type="hidden" value="search" name="action" />
-
 								<div class="row">
 									<div class="col-md-5">
 										<button id="report" type="button" class="btn btn-primary"
 											style="margin-left: 100px; width: 150px; border-radius: 10px;">リスト</button>
 									</div>
-
 									<div class="col-md-5">
-
-										<button id="search" type="submit" class="btn btn-primary"
+										<button id="search" type="button" class="btn btn-primary"
 											style="width: 150px; border-radius: 10px;">検索</button>
 
 									</div>
@@ -152,5 +149,15 @@
 	</div>
 	</main>
 	</div>
+	<script>
+		$('#search').click(function() {
+			$('#searchListForm').attr('action', '/kenshuu/admin-user');
+			document.getElementById('searchListForm').submit();
+		});
+		$('#report').click(function() {
+			$('#searchListForm').attr('action', '/kenshuu/report');
+			document.getElementById('searchListForm').submit();
+		});
+	</script>
 </body>
 </html>

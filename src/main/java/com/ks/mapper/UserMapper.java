@@ -33,6 +33,10 @@ public class UserMapper implements RowMapper<User> {
 					gen.setGenderName(resultSet.getString("gender_name"));
 					gen.setGenderId(resultSet.getInt("gender_id"));
 					user.setGender(gen);
+				}else {
+					Gender gen = new Gender();
+					gen.setGenderName("");
+					user.setGender(gen);
 				}
 				if (resultSet.getString("authority_name")!=null) {
 					/*ユーザのauthority_nameを取る時*/
@@ -40,13 +44,16 @@ public class UserMapper implements RowMapper<User> {
 					role.setAuthorityName(resultSet.getString("authority_name"));
 					role.setAuthorityId(resultSet.getInt("authority_id"));
 					user.setRole(role);
+				}else {
+					Role role= new Role();
+					role.setAuthorityName("");
+					user.setRole(role);
 				}
 			}catch(Exception ex) {
 
 			}
 			return user;
 		} catch (SQLException e) {
-			System.out.println("NULLL:49");
 			return null;
 		}
 	}

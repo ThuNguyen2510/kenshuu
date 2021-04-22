@@ -26,6 +26,7 @@
 <style>
 .errorTxt {
 	min-height: 20px;
+	margin-top:2%
 }
 
 h3 {
@@ -35,7 +36,7 @@ h3 {
 </style>
 	<font style="padding: 30px;" size="8">登録</font>
 
-	<div class="errorTxt">
+	<div class="errorTxt" >
 		<c:if test="${not empty message}">
 			<h3>${message}</h3>
 		</c:if>
@@ -43,7 +44,7 @@ h3 {
 
 	<div id="layoutSidenav_content">
 		<main>
-		<div class="container-fluid" style="margin-top: 100px">
+		<div class="container-fluid" style="margin-top: 40px">
 			<div class="card mb-4" style="padding-left: 10%">
 				<form action="<c:url value='/admin-user'/>"
 					name="registration" method="post">

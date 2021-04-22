@@ -30,6 +30,18 @@ public class User {
 
 	private Gender gender;
 
+	public User() {
+
+	}
+
+	public User(String userId, String familyName, String firstName, int genderId, int age) {
+		this.userId = userId;
+		this.familyName = familyName;
+		this.firstName = firstName;
+		this.genderId = genderId;
+		this.age = age;
+	}
+
 	public Role getRole() {
 		return role;
 	}
