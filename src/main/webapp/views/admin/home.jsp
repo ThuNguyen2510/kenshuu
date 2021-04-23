@@ -38,7 +38,7 @@
 										<strong>姓:</strong>
 									</div>
 									<div class="col-md-8">
-										<input type="text" name="familyName" />
+										<input type="text" name="familyName" value="${familyName}"/>
 									</div>
 								</div>
 							</div>
@@ -48,7 +48,7 @@
 										<strong>名:</strong>
 									</div>
 									<div class="col-md-8">
-										<input name="firstName" type="text" />
+										<input name="firstName" type="text" value="${firstName}" />
 									</div>
 								</div>
 							</div>
@@ -62,9 +62,8 @@
 									<div class="col-md-8">
 										<select name="authorityId" style="width: 182px; height: 30px">
 											<option value="-1"></option>
-
 											<c:forEach var="item" items="${listRole}">
-												<option value="${item.authorityId}">
+												<option value="${item.authorityId}"<c:if test="${item.authorityId == authorityId}">selected="selected"</c:if>>
 													${item.authorityName}</option>
 											</c:forEach>
 										</select>

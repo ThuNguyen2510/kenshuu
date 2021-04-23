@@ -95,6 +95,7 @@ public class UserController extends HttpServlet {
 				viewLink = "/views/admin/home.jsp";//リングをセットする
 				List<Role> listRole = roleService.getListRole();//全ての役職を取る
 				logger.info("SEARCH");
+				logger.info(request.getParameter("authorityId"));
 				List<User> listUser = userService.search(request.getParameter("familyName"),
 						request.getParameter("firstName"), Integer.valueOf(request.getParameter("authorityId")));//パラメータを取って、見つける
 				request.setAttribute("listUser", listUser);//ユーザリストを保存する
@@ -102,7 +103,9 @@ public class UserController extends HttpServlet {
 				if (listUser == null || listUser.size() == 0) {
 					request.setAttribute("message", "※ユーザが見つかりません。");//見つからない場合、メッセージをセットする
 				}
-
+				request.setAttribute("familyName", request.getParameter("familyName")); //入力したデータを返す
+				request.setAttribute("firstName", request.getParameter("firstName"));
+				request.setAttribute("authorityId", request.getParameter("authorityId"));
 			}
 			if (action.equals("create")) {
 				User newUser = mapForm(request);

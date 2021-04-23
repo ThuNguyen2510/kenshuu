@@ -5,9 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
-import com.ks.model.Role;
 import com.ks.model.User;
 
 import jp.co.nobworks.openfunxion4.core.BlockLayout;
@@ -21,7 +21,7 @@ public class MakeReport {
 	final private static String XML_FILE = "C:/Users/nguye/eclipse-workspace/kenshuu/report.xml";
 	final private static String PDF_FILE = "C:/Users/nguye/eclipse-workspace/kenshuu/report.pdf";;
 
-	public void exec(List<User> userList, List<Role> roleList) {
+	public void exec(List<User> userList) {
 		OpenFunXion ofx = new OpenFunXion(XML_FILE); // 帳票情報XMLファイルの読み込み
 		try {
 			ofx.setDebug(true); // デバッグモードの指定
@@ -33,15 +33,12 @@ public class MakeReport {
 			e.printStackTrace();
 			return;
 		}
-		makePdf(ofx, userList, roleList); // PDFファイルへの出力処理
+		makePdf(ofx, userList); // PDFファイルへの出力処理
 	}
 
-	public void makePdf(OpenFunXion ofx, List<User> dataList, List<Role> roleList) {
+	public void makePdf(OpenFunXion ofx, List<User> dataList) {
 
-		// 処理モデルから一覧データのコレクションを取得
-		// 大量データの場合、このように一度にもってこれません。あくまでもサンプルです。
-
-		Collections.sort(dataList, new Comparator<User>() {
+		Collections.sort(dataList, new Comparator<User>() {//dataList配列をAuthorityId（役職）で並び
 			@Override
 			public int compare(User z1, User z2) {
 				if (z1.getAuthorityId() > z2.getAuthorityId())
@@ -51,18 +48,21 @@ public class MakeReport {
 				return 0;
 			}
 		});
-		int id = dataList.get(0).getAuthorityId();
+		HashSet<Integer> roleSize = new HashSet<Integer>();//dataList配列のAuthorityId数を保存する
+		for (int i = 0; i < dataList.size(); i++) {
+			roleSize.add(dataList.get(i).getAuthorityId());
+		}
+		int id = dataList.get(0).getAuthorityId();//最初のUserのAuthorityId
 
 		// Y方向の移動量を決める
 		// １行１２ドットでデザインしたので、3行分移動
 		int moveY = 12 * 3;
 
 		int pageNo = 1;
-		int pageSum = sumPage(dataList);
+		int pageSum = sumPage(dataList)+roleSize.size();//総ページ数
 		// レイアウトの固定部を出力
 		printOutline(ofx, dataList.get(0).getRole().getAuthorityName() == "" ? " 未登録"
 				: dataList.get(0).getRole().getAuthorityName());
-
 		// ページ部を取得
 		Text page = ofx.getText("page");
 		// 初期ページ数の設定
@@ -86,12 +86,12 @@ public class MakeReport {
 		// これはキャストして取得する例
 		Box reverseRow = (Box) ofx.getPrintObject("reverse_row");
 		BlockLayout dataBlock = ofx.getBlockLayout("data_block");
-
+		int j = 1;//エレメントのCOUNT
 		for (int i = 0; i < dataList.size(); i++) {
-			int j = 1;
+
 			User model = dataList.get(i);
 
-			if (count > 0 && count % 15 == 0 || model.getAuthorityId() != id) {
+			if (count > 0 && count % 15 == 0 || model.getAuthorityId() != id) {//15行や違う役職の場合、改ページ
 				// 改ページ
 				ofx.newPage();
 				// 改ページしたので、位置を元に戻す
@@ -120,7 +120,7 @@ public class MakeReport {
 			userId.moveY(moveY);
 
 			if (model.getGender().getGenderName() == "") {
-				gender.setMessage("");
+				gender.setMessage("未入力");//GenderIDが未入力
 
 			} else {
 				gender.setMessage(String.valueOf(model.getGender().getGenderName()));
@@ -130,7 +130,7 @@ public class MakeReport {
 			gender.moveY(moveY);
 
 			if (model.getAge() == 0) {
-				age.setMessage("");
+				age.setMessage("未入力");//Ageが未入力
 			} else {
 				age.setMessage(String.valueOf(model.getAge()));
 			}
@@ -168,10 +168,10 @@ public class MakeReport {
 		ofx.print("out_box");
 		Text time = ofx.getText("create_date");
 		String timeStamp = new SimpleDateFormat("yyyy/M/dd HH:mm:ss").format(new Date());
-		time.setMessage(timeStamp);
+		time.setMessage(timeStamp);//create_time を書く
 		time.print();
 		Text authority_name = ofx.getText("authority_name");
-		authority_name.setMessage(authorityName);
+		authority_name.setMessage(authorityName);//役職を書く
 		authority_name.print();
 
 	}
@@ -186,15 +186,17 @@ public class MakeReport {
 			int id = list.get(i).getAuthorityId();
 			if (id == idStart) {
 				count++;
+
 			}
 			if (count >= 15) {
-				sum = count / 15;
+				sum = count / 15;//それぞれに役職のページ数（完全にエレメントが記入しておく）
 			}
 			if (id != idStart) {
 				idStart = list.get(i).getAuthorityId();
 				count = 0;
+				max += sum;//総ページ数
 			}
-			max+=sum;
+
 		}
 		return max;
 	}
