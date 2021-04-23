@@ -119,7 +119,7 @@ public class MakeReport {
 			userId.moveY(moveY);
 
 			if (model.getGender().getGenderName() == "") {
-				gender.setMessage("未入力");//GenderIDが未入力
+				gender.setMessage("");//GenderIDが未入力
 
 			} else {
 				gender.setMessage(String.valueOf(model.getGender().getGenderName()));
@@ -129,7 +129,7 @@ public class MakeReport {
 			gender.moveY(moveY);
 
 			if (model.getAge() == 0) {
-				age.setMessage("未入力");//Ageが未入力
+				age.setMessage("");//Ageが未入力
 			} else {
 				age.setMessage(String.valueOf(model.getAge()));
 			}

@@ -49,6 +49,7 @@ public class UserDAOImpl extends BaseDAOImpl<User> implements UserDAO {
 			sql.append(" AND (u.authority_id = ? )");
 			params.add(authorityId);
 		}
+		sql.append(" ORDER BY u.user_id ASC");
 		List<User> list = query2(sql.toString(), new UserMapper(), params);
 		return list;
 
