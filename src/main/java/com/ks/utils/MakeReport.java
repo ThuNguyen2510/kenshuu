@@ -72,7 +72,7 @@ public class MakeReport {
 		page.print();
 
 		// 改ページ用のカウンタ
-		int count = 0;
+		int count = 1;
 
 		// デザインツールで作成した各一覧項目の取得
 		Line rowLine = ofx.getLine("row_line");
@@ -94,9 +94,6 @@ public class MakeReport {
 			if (count > 0 && count % 15 == 0 || model.getAuthorityId() != id) {//15行や違う役職の場合、改ページ
 				// 改ページ
 				ofx.newPage();
-				// 改ページしたので、位置を元に戻す
-				// それぞれのオブジェクトでやってもいいが、
-				// BlockLayout で指定すると簡単
 				dataBlock.resetPosition();
 				// 新しいページの固定部を出力
 				printOutline(ofx, dataList.get(i).getRole().getAuthorityName() == "" ? " 未登録"
