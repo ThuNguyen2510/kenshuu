@@ -59,7 +59,7 @@ public class MakeReport {
 		int moveY = 12 * 3;
 
 		int pageNo = 1;
-		int pageSum = sumPage(dataList)+roleSize.size();//総ページ数
+		int pageSum = sumPage(dataList) + roleSize.size();//総ページ数
 		// レイアウトの固定部を出力
 		printOutline(ofx, dataList.get(0).getRole().getAuthorityName() == "" ? " 未登録"
 				: dataList.get(0).getRole().getAuthorityName());
@@ -72,7 +72,7 @@ public class MakeReport {
 		page.print();
 
 		// 改ページ用のカウンタ
-		int count = 1;
+		int count = 0;
 
 		// デザインツールで作成した各一覧項目の取得
 		Line rowLine = ofx.getLine("row_line");
@@ -101,8 +101,10 @@ public class MakeReport {
 				pageNo++;
 				page.setMessage("PAGE:" + pageNo + "/" + pageSum);
 				page.print();
+				if (model.getAuthorityId() != id)
+					j = 1;
 				id = model.getAuthorityId();
-				j = 1;
+				count = 0;
 			}
 			index.setMessage(String.valueOf(j));
 			index.print();
@@ -183,19 +185,14 @@ public class MakeReport {
 			int id = list.get(i).getAuthorityId();
 			if (id == idStart) {
 				count++;
-
-			}
-			if (count >= 15) {
-				sum = count / 15;//それぞれに役職のページ数（完全にエレメントが記入しておく）
 			}
 			if (id != idStart) {
 				idStart = list.get(i).getAuthorityId();
+				max += count / 15;//総ページ数
 				count = 0;
-				max += sum;//総ページ数
 			}
-
 		}
-		return max;
+		return max == 0 ? count / 15 : max;
 	}
 
 }
