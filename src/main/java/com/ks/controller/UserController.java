@@ -41,47 +41,56 @@ public class UserController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String action = request.getParameter("action");// アクションタイプを取る
 		String viewLink = "";//ビューのリングを保存する
-		if (action != null) {
-			if (action.equals("get")) {//全てのデータを表示するアクションタイプ
-				logger.info("GET LIST USER");
-				viewLink = "/views/admin/home.jsp";//リングをセットする
-				List<User> listUser = userService.getListUser();//全てのユーザを取る
-				List<Role> listRole = roleService.getListRole();//全ての役職を取る
-				request.setAttribute("listUser", listUser);//ユーザリストを保存する
-				request.setAttribute("listRole", listRole);//役職リストを保存する
+		if (request.getSession().getAttribute("currentUser") != null) {//ログインしている場合、一覧画面にアクセスできる
+			String action = request.getParameter("action");// アクションタイプを取る
+			if (action != null) {
+				if (action.equals("get")) {//全てのデータを表示するアクションタイプ
+					logger.info("GET LIST USER");
+					viewLink = "/views/admin/home.jsp";//リングをセットする
+					List<User> listUser = userService.getListUser();//全てのユーザを取る
+					List<Role> listRole = roleService.getListRole();//全ての役職を取る
+					request.setAttribute("listUser", listUser);//ユーザリストを保存する
+					request.setAttribute("listRole", listRole);//役職リストを保存する
+				}
+				if (action.equals("create")) {
+					logger.info("CREATE USER");
+					viewLink = "/views/admin/create.jsp";
+					List<Gender> listGender = genderService.getListGender();
+					List<Role> listRole = roleService.getListRole();
+					request.setAttribute("listGender", listGender);
+					request.setAttribute("listRole", listRole);
+					request.setAttribute("model", new User());
+				}
+				if (action.equals("update")) {
+					logger.info("UPDATE USER");
+					viewLink = "/views/admin/update.jsp";
+					List<Gender> listGender = genderService.getListGender();
+					List<Role> listRole = roleService.getListRole();
+					String userId = request.getParameter("userId");
+					User user = userService.getUser(userId);
+					request.setAttribute("listGender", listGender);
+					request.setAttribute("listRole", listRole);
+					request.setAttribute("model", user);
+				}
+				if (action.equals("delete")) {
+					logger.info("DELETE USER");
+					String userId = request.getParameter("userId");
+					User deleteUser = userService.getUser(userId);
+					request.setAttribute("model", deleteUser);
+					viewLink = "/views/admin/delete.jsp";
+				}
+				if (action.equals("logout")) {
+					logger.info("LOG OUT");
+					request.getSession().removeAttribute("currentUser");
+					viewLink = "/views/login.jsp";
+				}
 			}
-			if (action.equals("create")) {
-				logger.info("CREATE USER");
-				viewLink = "/views/admin/create.jsp";
-				List<Gender> listGender = genderService.getListGender();
-				List<Role> listRole = roleService.getListRole();
-				request.setAttribute("listGender", listGender);
-				request.setAttribute("listRole", listRole);
-				request.setAttribute("model", new User());
-			}
-			if (action.equals("update")) {
-				logger.info("UPDATE USER");
-				viewLink = "/views/admin/update.jsp";
-				List<Gender> listGender = genderService.getListGender();
-				List<Role> listRole = roleService.getListRole();
-				String userId = request.getParameter("userId");
-				User user = userService.getUser(userId);
-				request.setAttribute("listGender", listGender);
-				request.setAttribute("listRole", listRole);
-				request.setAttribute("model", user);
-			}
-			if (action.equals("delete")) {
-				logger.info("DELETE USER");
-				String userId = request.getParameter("userId");
-				User deleteUser = userService.getUser(userId);
-				request.setAttribute("model", deleteUser);
-				viewLink = "/views/admin/delete.jsp";
-			}
-
+		} else {//ログインしていない場合、ログイン画面に遷移する
+			viewLink = "/views/login.jsp";
+			request.setAttribute("message", "※ログインしてください。");
+			request.setAttribute("alert","danger");
 		}
-
 		RequestDispatcher rd = request.getRequestDispatcher(viewLink);
 		rd.forward(request, response);
 	}
@@ -95,7 +104,6 @@ public class UserController extends HttpServlet {
 				viewLink = "/views/admin/home.jsp";//リングをセットする
 				List<Role> listRole = roleService.getListRole();//全ての役職を取る
 				logger.info("SEARCH");
-				logger.info(request.getParameter("authorityId"));
 				List<User> listUser = userService.search(request.getParameter("familyName"),
 						request.getParameter("firstName"), Integer.valueOf(request.getParameter("authorityId")));//パラメータを取って、見つける
 				request.setAttribute("listUser", listUser);//ユーザリストを保存する

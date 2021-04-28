@@ -5,7 +5,6 @@
 	<openfunxion_common
 		value_count="101"
 		work_file="report.pdf"
-		work_command="C:\Program Files\Adobe\Acrobat 6.0\Reader\AcroRd32.exe %pdf_file"
 		print_command=""
 		external_font_file0="C:\WINNT\Fonts\CODE39.TTF"
 		external_font_name0="Agency FB"

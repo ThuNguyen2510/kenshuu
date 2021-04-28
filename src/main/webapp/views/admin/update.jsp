@@ -33,7 +33,7 @@ h3 {
 	color: red
 }
 </style>
-	<font style="padding: 30px;" size="8">登録</font>
+	<font style="padding: 30px;" size="8">変更</font>
 
 	<div class="errorTxt">
 		<c:if test="${not empty message}">

@@ -19,6 +19,9 @@
 </head>
 </head>
 <body>
+	<c:if test="${sessionScope.currentUser == null }">
+		<c:redirect url="${request.contextPath}/login" />
+	</c:if>
 	<nav class="sb-topnav navbar navbar-expand "> <font size="8">役職別集計</font>
 	<form
 		class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
@@ -27,11 +30,12 @@
 		style="padding-right: 5%">一覧</a> </nav>
 	<c:if test="${not empty message}">
 		<div>
-			<h5 style="padding-left: 20px; color: red">${message}</h5>
+			<h5 style="padding-left: 5%; color: blue; font-size: 25px;">${message}</h5>
 		</div>
 	</c:if>
 	<div class="container-fluid" style="margin-top: 50px">
-		<form action="<c:url value='/total'/>" method="get">
+		<form action="<c:url value='/total'/>" method="post">
+			<input type="hidden" value="get" name="action" />
 			<button class="btn btn-primary" type="submit"
 				style="margin-left: 85%; width: 120px">集計</button>
 		</form>
@@ -67,7 +71,7 @@
 								<td>${item.authorityName}</td>
 								<td>${item.male}</td>
 								<td>${item.female}</td>
-								<td style="color:red">${item.nullGender}</td>
+								<td style="color: red">${item.nullGender}</td>
 								<td>${item.under19}</td>
 								<td>${item.over20}</td>
 								<td>${item.nullAge}</td>

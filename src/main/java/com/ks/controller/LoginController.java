@@ -35,7 +35,15 @@ public class LoginController extends HttpServlet {
 			String alert = request.getParameter("alert");
 			String message = request.getParameter("message");
 			if (message != null && alert != null) {
-				request.setAttribute("message", "※ログインに失敗しました。");
+				if (message.equals("blankUserId")) {
+					request.setAttribute("message", "※ユーザIDが未入力です。");
+				} else if (message.equals("blankPassword")) {
+					request.setAttribute("message", "※パスワードが未入力です。");
+				} else if(message.equals("blankUserIdblankPassword")){
+					request.setAttribute("message", "※ユーザIDとパスワードが未入力です。");
+				}else {
+					request.setAttribute("message", "※ログインに失敗しました。");
+				}
 				request.setAttribute("alert", alert);
 			}
 			RequestDispatcher rd = request.getRequestDispatcher("/views/login.jsp");
@@ -61,8 +69,17 @@ public class LoginController extends HttpServlet {
 			}
 
 		} else {
+			String message = "";
 			logger.info("LOGIN FAIL");
-			response.sendRedirect(request.getContextPath() + "/login?message=fail&alert=danger");
+			if (userId.equals("")) {
+				message = "blankUserId";
+
+			}
+			if(password.equals("")) {
+				message += "blankPassword";
+			}
+			response.sendRedirect(request.getContextPath() + "/login?message=" + message + "&alert=danger");
+
 		}
 
 	}

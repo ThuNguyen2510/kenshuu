@@ -36,4 +36,12 @@ public class TotalController extends HttpServlet {
 		rd.forward(request, response);
 	}
 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		if (request.getParameter("action")!="") {
+			request.setAttribute("message", "最新の状態で更新されました。");
+		}
+		doGet(request, response);
+	}
+
 }
