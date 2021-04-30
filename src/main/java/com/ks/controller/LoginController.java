@@ -62,7 +62,7 @@ public class LoginController extends HttpServlet {
 			if (user != null) {
 				logger.info("LOGIN SUCCESS");
 				session.setAttribute("currentUser", user.getUserId()); // save user in session
-				response.sendRedirect(request.getContextPath() + "/admin-user?action=get");
+				response.sendRedirect(request.getContextPath() + "/admin-user?action=get&message=success");
 			} else {
 				logger.info("LOGIN FAIL");
 				response.sendRedirect(request.getContextPath() + "/login?message=fail&alert=danger");
@@ -73,7 +73,6 @@ public class LoginController extends HttpServlet {
 			logger.info("LOGIN FAIL");
 			if (userId.equals("")) {
 				message = "blankUserId";
-
 			}
 			if(password.equals("")) {
 				message += "blankPassword";

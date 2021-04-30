@@ -45,45 +45,38 @@ public class ReportController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		logger.info("SAVE FILE PDF");
-		if(request.getSession().getAttribute("currentUser")!=null) {
-			List<User> userList = userService.search(request.getParameter("familyName"),
-					request.getParameter("firstName"), Integer.valueOf(request.getParameter("authorityId")));//パラメータを取って、見つける
-			if (userList != null && userList.size() != 0) {
-				response.setContentType("application/pdf");
-				report.exec(userList);//帳票を作成する
-				ServletContext context = getServletContext();
-				String fullPath = "C:/Users/nguye/eclipse-workspace/kenshuu/report.pdf";//作成したファイルのリング
-				Path path = Paths.get(fullPath);
-				byte[] data = Files.readAllBytes(path);
 
-				response.setContentType("application/octet-stream");
-				response.setHeader("Content-disposition", "attachment; filename=report.pdf");
-				response.setContentLength(data.length);
-				InputStream inputStream = new BufferedInputStream(new ByteArrayInputStream(data));//新しいファイルを作成する
-				OutputStream outStream = response.getOutputStream();
-				byte[] buffer = new byte[4096];
-				int bytesRead = -1;
-				while ((bytesRead = inputStream.read(buffer)) != -1) {
-					outStream.write(buffer, 0, bytesRead);//データを記入する
-				}
-				inputStream.close();
-				outStream.close();
-			} else {//userList配列は空
-				request.setAttribute("message", "※リスト要素が０です。");
-				List<User> listUser = userService.getListUser();//全てのユーザを取る
-				List<Role> listRole = roleService.getListRole();//全ての役職を取る
-				request.setAttribute("listUser", listUser);//ユーザリストを保存する
-				request.setAttribute("listRole", listRole);//役職リストを保存する
-				RequestDispatcher rd = request.getRequestDispatcher("/views/admin/home.jsp");
-				rd.forward(request, response);
+		List<User> userList = userService.search(request.getParameter("familyName"),
+				request.getParameter("firstName"), Integer.valueOf(request.getParameter("authorityId")));//パラメータを取って、見つける
+		if (userList != null && userList.size() != 0) {
+			response.setContentType("application/pdf");
+			report.exec(userList);//帳票を作成する
+			ServletContext context = getServletContext();
+			String fullPath = "C:/Users/nguye/eclipse-workspace/kenshuu/report.pdf";//作成したファイルのリング
+			Path path = Paths.get(fullPath);
+			byte[] data = Files.readAllBytes(path);
+
+			response.setContentType("application/octet-stream");
+			response.setHeader("Content-disposition", "attachment; filename=report.pdf");
+			response.setContentLength(data.length);
+			InputStream inputStream = new BufferedInputStream(new ByteArrayInputStream(data));//新しいファイルを作成する
+			OutputStream outStream = response.getOutputStream();
+			byte[] buffer = new byte[4096];
+			int bytesRead = -1;
+			while ((bytesRead = inputStream.read(buffer)) != -1) {
+				outStream.write(buffer, 0, bytesRead);//データを記入する
 			}
-		}else {
-			request.setAttribute("message", "※ログインしてください。");
-			request.setAttribute("alert","danger");
-			RequestDispatcher rd = request.getRequestDispatcher("/views/login.jsp");
+			inputStream.close();
+			outStream.close();
+		} else {//userList配列は空
+			request.setAttribute("message", "※リスト要素が０です。");
+			List<User> listUser = userService.getListUser();//全てのユーザを取る
+			List<Role> listRole = roleService.getListRole();//全ての役職を取る
+			request.setAttribute("listUser", listUser);//ユーザリストを保存する
+			request.setAttribute("listRole", listRole);//役職リストを保存する
+			RequestDispatcher rd = request.getRequestDispatcher("/views/admin/home.jsp");
 			rd.forward(request, response);
 		}
-
 
 	}
 

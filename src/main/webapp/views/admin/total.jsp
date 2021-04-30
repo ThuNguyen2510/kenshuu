@@ -19,9 +19,6 @@
 </head>
 </head>
 <body>
-	<c:if test="${sessionScope.currentUser == null }">
-		<c:redirect url="${request.contextPath}/login" />
-	</c:if>
 	<nav class="sb-topnav navbar navbar-expand "> <font size="8">役職別集計</font>
 	<form
 		class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">

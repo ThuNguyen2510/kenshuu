@@ -22,7 +22,7 @@
 	<%@ include file="/views/layout/header.jsp"%>
 	<c:if test="${not empty message}">
 		<div>
-			<h5 style="padding-left: 20px; color: red">${message}</h5>
+			<h5 style="padding-left: 20px;font-weight: 600;">${message}</h5>
 		</div>
 	</c:if>
 	<div id="layoutSidenav_content">
