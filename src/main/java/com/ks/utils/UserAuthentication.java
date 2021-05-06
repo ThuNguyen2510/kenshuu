@@ -43,7 +43,6 @@ public class UserAuthentication implements Filter {
 		}else {
 			chain.doFilter(request, response);
 		}
-
 	}
 
 	@Override

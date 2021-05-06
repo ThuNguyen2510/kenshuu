@@ -53,8 +53,8 @@
 
 			<input type="hidden" value="login" name="action" />
 			<div class="row" id="butSubmit">
-				<button class="btn btn-primary" type="submit"
-					style="border-radius: 10px; width: 15%; margin-top: 30px;"；；">ログイン</button>
+				<button  type="submit"
+					style="border-radius: 10px; width: 15%; margin-top: 30px;height: 40px;">ログイン</button>
 			</div>
 
 		</form>

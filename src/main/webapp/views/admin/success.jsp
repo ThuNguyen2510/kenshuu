@@ -26,7 +26,7 @@
 	<style>
 h3 {
 	padding-left: 15%;
-	padding-top:5%
+	padding-top: 5%
 }
 </style>
 	<font style="padding: 30px;" size="8">${message}</font>
@@ -39,10 +39,11 @@ h3 {
 	<div id="layoutSidenav_content">
 		<main>
 		<div class="container-fluid" style="margin-top: 50px">
-			<div  style="padding-left: 10%">
-				<form  action="<c:url value='/admin-user'/>" method="get">
-				<input type="hidden" name="action" value="get">
-					<button class="btn btn-secondary" style="margin-left: 20%">一覧へ戻る</button>
+			<div style="padding-left: 10%">
+				<form action="<c:url value='/admin-user'/>" method="get">
+					<input type="hidden" name="action" value="get">
+					<button
+						style="margin-left: 20%; border-radius: 10px; width: 15%; font-size: 20px; font-weight: 600">一覧へ戻る</button>
 				</form>
 
 			</div>

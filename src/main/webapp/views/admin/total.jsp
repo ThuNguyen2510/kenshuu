@@ -33,8 +33,8 @@
 	<div class="container-fluid" style="margin-top: 50px">
 		<form action="<c:url value='/total'/>" method="post">
 			<input type="hidden" value="get" name="action" />
-			<button class="btn btn-primary" type="submit"
-				style="margin-left: 85%; width: 120px">集計</button>
+			<button type="submit"
+				style="margin-left: 85%; width: 120px;font-size: 20px; font-weight: 600;border-radius:10px">集計</button>
 		</form>
 	</div>
 	<div id="layoutSidenav_content">

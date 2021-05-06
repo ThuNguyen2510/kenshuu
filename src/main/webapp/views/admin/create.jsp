@@ -23,10 +23,10 @@
 </head>
 
 <body>
-<style>
+	<style>
 .errorTxt {
 	min-height: 20px;
-	margin-top:2%
+	margin-top: 2%
 }
 
 h3 {
@@ -36,7 +36,7 @@ h3 {
 </style>
 	<font style="padding: 30px;" size="8">登録</font>
 
-	<div class="errorTxt" >
+	<div class="errorTxt">
 		<c:if test="${not empty message}">
 			<h3>${message}</h3>
 		</c:if>
@@ -46,8 +46,8 @@ h3 {
 		<main>
 		<div class="container-fluid" style="margin-top: 40px">
 			<div class="card mb-4" style="padding-left: 10%">
-				<form action="<c:url value='/admin-user'/>"
-					name="registration" method="post">
+				<form action="<c:url value='/admin-user'/>" name="registration"
+					method="post">
 					<div class="card-body">
 						<div class="form-group row">
 							<div class="col-md-6">
@@ -129,7 +129,7 @@ h3 {
 										<strong>年齢:</strong>
 									</div>
 									<div class="col-md-8">
-										<input id="age" name="age" type="text"  value="${model.age}"/>
+										<input id="age" name="age" type="text" value="${model.age}" />
 									</div>
 								</div>
 							</div>
@@ -166,7 +166,8 @@ h3 {
 									</div>
 									<div class="col-md-8">
 										<input type="checkbox" id="admin"
-											style="width: 20px; height: 20px;" value="${model.admin}" name="admin">
+											style="width: 20px; height: 20px;" value="${model.admin}"
+											name="admin">
 									</div>
 								</div>
 
@@ -174,13 +175,14 @@ h3 {
 						</div>
 						<div class="form-group row" style="padding-top: 40px">
 							<div class="col-sm-5">
-								<button id="back" style="margin-left: 60%" type="button"
-									class="btn btn-secondary">戻る</button>
+								<button id="back"
+									style="margin-left: 60%; border-radius: 10px; width: 30%; height: 40px;font-size: 20px; font-weight: 600;"
+									type="button">戻る</button>
 							</div>
 							<div class="col-sm-5">
 								<input type="hidden" name="action" value="create">
 								<button id="create" type="submit"
-									class="btn btn-primary">登録</button>
+									style="border-radius: 10px; width: 30%; height: 40px;font-size: 20px; font-weight: 600;">登録</button>
 							</div>
 						</div>
 					</div>

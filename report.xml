@@ -3,8 +3,9 @@
 	<openfunxion_property classname="jp.co.nobworks.openfunxion4.core.DummyPrintProperty">
 	</openfunxion_property>
 	<openfunxion_common
-		value_count="101"
+		value_count="103"
 		work_file="report.pdf"
+		work_command=""
 		print_command=""
 		external_font_file0="C:\WINNT\Fonts\CODE39.TTF"
 		external_font_name0="Agency FB"
@@ -52,10 +53,10 @@
 		<openfunxion_text parent="body_block" id="text_1" name="text_1" x1="24" y1="48" message="ユーザーリスト" horizontal_scale="1.0" font="HeiseiMin-W3" font_encoding="UniJIS-UCS2-HW-H" font_size="20" background_enable="false" background_red="0" background_green="0" background_blue="0" size_outline="false" red="0" green="0" blue="0" memo="" display="true" output="true"
 		 underline="false" underline_thick="0.0" underline_ypos="0.0" underline_red="0" underline_green="0" underline_blue="0" bold="true" italic="false" outline="false" strike="false" external_font_enable="false" external_font_file="C:\WINNT\Fonts\CODE39.TTF" external_font_name="Agency FB">
 		</openfunxion_text>
-		<openfunxion_text parent="body_block" id="text_2" name="text_2" x1="330" y1="48" message="出力日時" horizontal_scale="1.0" font="HeiseiMin-W3" font_encoding="UniJIS-UCS2-HW-H" font_size="16" background_enable="false" background_red="0" background_green="0" background_blue="0" size_outline="false" red="0" green="0" blue="0" memo="" display="true" output="true"
+		<openfunxion_text parent="body_block" id="text_14" name="text_14" x1="18" y1="102" message="役職:" horizontal_scale="1.0" font="HeiseiMin-W3" font_encoding="UniJIS-UCS2-HW-H" font_size="18" background_enable="false" background_red="0" background_green="0" background_blue="0" size_outline="false" red="0" green="0" blue="0" memo="" display="true" output="true"
 		 underline="false" underline_thick="0.0" underline_ypos="0.0" underline_red="0" underline_green="0" underline_blue="0" bold="false" italic="false" outline="false" strike="false" external_font_enable="false" external_font_file="C:\WINNT\Fonts\CODE39.TTF" external_font_name="Agency FB">
 		</openfunxion_text>
-		<openfunxion_text parent="body_block" id="text_14" name="text_14" x1="18" y1="102" message="役職:" horizontal_scale="1.0" font="HeiseiMin-W3" font_encoding="UniJIS-UCS2-HW-H" font_size="18" background_enable="false" background_red="0" background_green="0" background_blue="0" size_outline="false" red="0" green="0" blue="0" memo="" display="true" output="true"
+		<openfunxion_text parent="body_block" id="text_2" name="text_2" x1="282" y1="48" message="出力日時" horizontal_scale="1.0" font="HeiseiMin-W3" font_encoding="UniJIS-UCS2-HW-H" font_size="14" background_enable="false" background_red="0" background_green="0" background_blue="0" size_outline="false" red="0" green="0" blue="0" memo="" display="true" output="true"
 		 underline="false" underline_thick="0.0" underline_ypos="0.0" underline_red="0" underline_green="0" underline_blue="0" bold="false" italic="false" outline="false" strike="false" external_font_enable="false" external_font_file="C:\WINNT\Fonts\CODE39.TTF" external_font_name="Agency FB">
 		</openfunxion_text>
 	</openfunxion_blocklayout>
@@ -83,10 +84,13 @@
 	<openfunxion_text parent="_root" id="authority_name" name="text_3" x1="78" y1="102" message="NNNNNNNNNNNNNNNNNNN" horizontal_scale="1.0" font="HeiseiMin-W3" font_encoding="UniJIS-UCS2-HW-H" font_size="18" background_enable="false" background_red="0" background_green="0" background_blue="0" size_outline="false" red="0" green="0" blue="0" memo="" display="true" output="true"
 	 underline="false" underline_thick="0.0" underline_ypos="0.0" underline_red="0" underline_green="0" underline_blue="0" bold="false" italic="false" outline="false" strike="false" external_font_enable="false" external_font_file="C:\WINNT\Fonts\CODE39.TTF" external_font_name="Agency FB">
 	</openfunxion_text>
-	<openfunxion_text parent="_root" id="create_date" name="text_12" x1="414" y1="48" message="YYYY/MM/DD　HH:MM:SS" horizontal_scale="1.0" font="HeiseiMin-W3" font_encoding="UniJIS-UCS2-HW-H" font_size="16" background_enable="false" background_red="0" background_green="0" background_blue="0" size_outline="false" red="0" green="0" blue="0" memo="" display="true" output="true"
+	<openfunxion_text parent="_root" id="create_date" name="text_12" x1="348" y1="48" message="YYYY/MM/DD HH:MM:SS" horizontal_scale="1.0" font="HeiseiMin-W3" font_encoding="UniJIS-UCS2-HW-H" font_size="14" background_enable="false" background_red="0" background_green="0" background_blue="0" size_outline="false" red="0" green="0" blue="0" memo="" display="true" output="true"
 	 underline="false" underline_thick="0.0" underline_ypos="0.0" underline_red="0" underline_green="0" underline_blue="0" bold="false" italic="false" outline="false" strike="false" external_font_enable="false" external_font_file="C:\WINNT\Fonts\CODE39.TTF" external_font_name="Agency FB">
 	</openfunxion_text>
-	<openfunxion_text parent="_root" id="page" name="text_4" x1="438" y1="78" message="PAGE:  (ZZ9/ZZ9)" horizontal_scale="1.0" font="HeiseiMin-W3" font_encoding="UniJIS-UCS2-HW-H" font_size="16" background_enable="false" background_red="0" background_green="0" background_blue="0" size_outline="false" red="0" green="0" blue="0" memo="" display="true" output="true"
+	<openfunxion_text parent="_root" id="page" name="text_4" x1="492" y1="48" message="PAGE: (ZZ9/ZZ9)" horizontal_scale="1.0" font="HeiseiMin-W3" font_encoding="UniJIS-UCS2-HW-H" font_size="14" background_enable="false" background_red="0" background_green="0" background_blue="0" size_outline="false" red="0" green="0" blue="0" memo="" display="true" output="true"
 	 underline="false" underline_thick="0.0" underline_ypos="0.0" underline_red="0" underline_green="0" underline_blue="0" bold="false" italic="false" outline="false" strike="false" external_font_enable="false" external_font_file="C:\WINNT\Fonts\CODE39.TTF" external_font_name="Agency FB">
+	</openfunxion_text>
+	<openfunxion_text parent="_root" id="text_101" name="text_101" x1="482" y1="48" message="|" horizontal_scale="1.0" font="HeiseiMin-W3" font_encoding="UniJIS-UCS2-HW-H" font_size="14" background_enable="false" background_red="0" background_green="0" background_blue="0" size_outline="false" red="0" green="0" blue="0" memo="" display="true" output="true"
+	 underline="false" underline_thick="0.0" underline_ypos="0.0" underline_red="0" underline_green="0" underline_blue="0" bold="false" italic="false" outline="false" strike="false" external_font_enable="false" external_font_file="" external_font_name="">
 	</openfunxion_text>
 </openfunxion>

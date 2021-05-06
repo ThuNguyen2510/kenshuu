@@ -169,6 +169,7 @@ public class MakeReport {
 		String timeStamp = new SimpleDateFormat("yyyy/M/dd HH:mm:ss").format(new Date());
 		time.setMessage(timeStamp);//create_time を書く
 		time.print();
+		ofx.print("text_101");
 		Text authority_name = ofx.getText("authority_name");
 		authority_name.setMessage(authorityName);//役職を書く
 		authority_name.print();

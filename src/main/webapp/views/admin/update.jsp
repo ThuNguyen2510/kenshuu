@@ -181,12 +181,14 @@ h3 {
 						</div>
 						<div class="form-group row" style="padding-top: 40px">
 							<div class="col-sm-5">
-								<button id="back" style="margin-left: 60%" type="button"
-									class="btn btn-secondary">戻る</button>
+								<button id="back"
+									style="margin-left: 60%; border-radius: 10px; width: 30%; height: 40px; font-size: 20px; font-weight: 600;"
+									type="button">戻る</button>
 							</div>
 							<div class="col-sm-5">
 								<input type="hidden" name="action" value="update">
-								<button id="create" type="submit" class="btn btn-primary">更新</button>
+								<button id="create" type="submit"
+									style="border-radius: 10px; width: 30%; height: 40px; font-size: 20px; font-weight: 600;">更新</button>
 							</div>
 						</div>
 					</div>

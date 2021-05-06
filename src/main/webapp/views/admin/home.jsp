@@ -74,12 +74,12 @@
 								<input type="hidden" value="search" name="action" />
 								<div class="row">
 									<div class="col-md-5">
-										<button id="report" type="button" class="btn btn-primary"
-											style="margin-left: 100px; width: 150px; border-radius: 10px;">リスト</button>
+										<button id="report" type="button"
+											style="margin-left: 100px; width: 150px; border-radius: 10px;font-size: 20px; font-weight: 600;">リスト</button>
 									</div>
 									<div class="col-md-5">
-										<button id="search" type="button" class="btn btn-primary"
-											style="width: 150px; border-radius: 10px;">検索</button>
+										<button id="search" type="button"
+											style="width: 150px; border-radius: 10px;font-size: 20px; font-weight: 600;">検索</button>
 
 									</div>
 								</div>
@@ -108,7 +108,7 @@
 								<th>
 									<form action="<c:url value='/admin-user'/>" method="get">
 										<input type="hidden" value="create" name="action" />
-										<button style="width: 100%" class="btn btn-primary">登録</button>
+										<button style="width: 100%;border-radius:10px" >登録</button>
 									</form>
 								</th>
 							</tr>
@@ -128,13 +128,13 @@
 										</c:if>${item.role.authorityName}</td>
 									<td>
 
-										<button style="width: 45%"
+										<button style="width: 45%;border-radius:10px"
 											onclick="window.location.href='/kenshuu/admin-user?action=update&userId=${item.userId}'"
-											class="btn btn-warning">変更</button>
+											>変更</button>
 
-										<button style="width: 45%"
+										<button style="width: 45%;border-radius:10px"
 											onclick="window.location.href='/kenshuu/admin-user?action=delete&userId=${item.userId}'"
-											class="btn btn-danger">削除</button>
+											>削除</button>
 
 									</td>
 								</tr>
