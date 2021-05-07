@@ -56,7 +56,7 @@ h3 {
 										<strong>ユーザID:</strong>
 									</div>
 									<div class="col-md-8">
-										<input id="userId" type="text" value="${model.userId}"
+										<input style="color:red" id="userId" type="text" value="${model.userId}"
 											name="userId" />
 									</div>
 								</div>

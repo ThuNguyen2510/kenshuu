@@ -61,9 +61,6 @@ public class UserDAOImpl extends BaseDAOImpl<User> implements UserDAO {
 				"INSERT INTO public.mst_user (user_id, password, family_name, first_name,");
 		sql.append(" admin, create_user_id, update_user_id, create_date, update_date, age, authority_id, gender_id)");
 		sql.append(" VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-		if (getUser(newUser.getUserId()) != null) {//登録済みのユーザIDで登録した場合
-			return false;
-		}
 		newUser.setUpdateUserId(newUser.getCreateUserId());
 		newUser.setCreateDate(new Date().getTime() / 1000);
 		newUser.setUpdateDate(new Date().getTime() / 1000);

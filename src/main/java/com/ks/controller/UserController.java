@@ -41,6 +41,7 @@ public class UserController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 		String viewLink = "";//ビューのリングを保存する
 		String action = request.getParameter("action");// アクションタイプを取る
 		if (action != null) {
@@ -99,6 +100,7 @@ public class UserController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 		String action = request.getParameter("action");// アクションタイプを取る
 		String viewLink = "";//ビューのリングを保存する
 		if (action != null) {
@@ -120,19 +122,25 @@ public class UserController extends HttpServlet {
 			if (action.equals("create")) {
 				User newUser = mapForm(request);
 				logger.info("SAVE NEW USER");
+				logger.info(newUser.getFirstName());
 				ValidateUser validator = new ValidateUser();
 				String message = validator.validate(newUser);//ユーザのフィールドをバリデーションチェック、エラーをセットする
 				if (message.equals("") == false) {
 					request.setAttribute("message", message);
 					viewLink = "/views/admin/create.jsp";
 				} else {
-					boolean rs = userService.createUser(newUser);//登録する
-					if (rs) {//成功場合
-						request.setAttribute("message", "登録完了");
-						viewLink = "/views/admin/success.jsp";
-					} else {//失敗場合/
+					if (userService.getUser(newUser.getUserId()) != null) {//登録済みのユーザIDで登録した場合
 						request.setAttribute("message", "※ ユーザIDが重複しています。");
 						viewLink = "/views/admin/create.jsp";
+					} else {
+						boolean check = userService.createUser(newUser);//登録する
+						if (check) {//成功場合
+							request.setAttribute("message", "登録完了");
+							viewLink = "/views/admin/success.jsp";
+						} else {//失敗場合/
+							request.setAttribute("message", "※ 登録失敗しました。");
+							viewLink = "/views/admin/create.jsp";
+						}
 					}
 				}
 				request.setAttribute("model", newUser);//入力したユーザ情報を返す
@@ -147,8 +155,8 @@ public class UserController extends HttpServlet {
 					request.setAttribute("message", message);//更新失敗する
 					viewLink = "/views/admin/update.jsp";
 				} else {
-					boolean rs = userService.updateUser(updateUser);//更新する
-					if (rs) {//成功場合
+					boolean check = userService.updateUser(updateUser);//更新する
+					if (check) {//成功場合
 						request.setAttribute("message", "更新完了");
 						viewLink = "/views/admin/success.jsp";
 					} else {//失敗場合/
@@ -168,10 +176,9 @@ public class UserController extends HttpServlet {
 					User deleteUser = userService.getUser(userId);
 					request.setAttribute("model", deleteUser);
 					viewLink = "/views/admin/delete.jsp";
-
 				} else {
-					boolean rs = userService.deleteUser(userId);
-					if (rs) {
+					boolean check = userService.deleteUser(userId);
+					if (check) {
 						viewLink = "/views/admin/success.jsp";
 						request.setAttribute("message", "削除完了");//成功場合
 					} else {
@@ -190,10 +197,12 @@ public class UserController extends HttpServlet {
 	}
 
 	private User mapForm(HttpServletRequest request) {
+
 		User newUser = new User();
 		newUser.setUserId(request.getParameter("userId"));
 		newUser.setPassword(request.getParameter("password"));
 		newUser.setFamilyName(request.getParameter("familyName"));
+		logger.info(request.getParameter("familyName"));
 		newUser.setFirstName(request.getParameter("firstName"));
 		newUser.setGenderId(Integer.parseInt(request.getParameter("genderId")));
 		newUser.setAuthorityId(Integer.parseInt(request.getParameter("authorityId")));

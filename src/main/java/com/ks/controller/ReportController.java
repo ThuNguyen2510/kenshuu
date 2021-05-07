@@ -11,7 +11,6 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -51,7 +50,6 @@ public class ReportController extends HttpServlet {
 		if (userList != null && userList.size() != 0) {
 			response.setContentType("application/pdf");
 			report.exec(userList);//帳票を作成する
-			ServletContext context = getServletContext();
 			String fullPath = "C:/Users/nguye/eclipse-workspace/kenshuu/report.pdf";//作成したファイルのリング
 			Path path = Paths.get(fullPath);
 			byte[] data = Files.readAllBytes(path);

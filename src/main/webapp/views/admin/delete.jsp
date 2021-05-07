@@ -36,7 +36,7 @@ h3 {
 			<h3>以下のデータを削除してよろしいですか。</h3>
 		</c:if>
 		<c:if test="${ not empty message}">
-			<h3 style="color:red">${message}</h3>
+			<h3 style="color: red">${message}</h3>
 		</c:if>
 	</div>
 
@@ -58,12 +58,15 @@ h3 {
 					<input type="hidden" name="userId" value="${model.userId }">
 					<div class="form-group row" style="padding-top: 40px">
 						<div class="col-sm-5">
-							<button id="back" style="margin-left: 60%" type="button"
-								class="btn btn-secondary">戻る</button>
+							<button id="back"
+								style="margin-left: 60%; border-radius: 10px; width: 30%; height: 40px; font-size: 20px; font-weight: 600;"
+								type="button">戻る</button>
 						</div>
 						<div class="col-sm-5">
 							<input type="hidden" name="action" value="delete">
-							<button id="create" type="submit" class="btn btn-primary">削除</button>
+							<button
+								style="border-radius: 10px; width: 30%; height: 40px; font-size: 20px; font-weight: 600;"
+								id="create" type="submit">削除</button>
 						</div>
 					</div>
 			</div>

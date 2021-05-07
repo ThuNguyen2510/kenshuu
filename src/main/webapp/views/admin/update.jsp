@@ -55,7 +55,7 @@ h3 {
 										<strong>ユーザID:</strong>
 									</div>
 									<div class="col-md-8">
-										<label>${model.userId}</label>
+										<label style="color: red">${model.userId}</label>
 									</div>
 								</div>
 							</div>

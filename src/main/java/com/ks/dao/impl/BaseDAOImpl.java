@@ -58,9 +58,12 @@ public class BaseDAOImpl<T> implements BaseDAO<T> {
 			return null;
 		} finally {
 			try {
-				if (connection != null || statement != null || resultSet != null) {
-					connection.close();
-				}
+				if (resultSet != null)
+					resultSet.close();
+				if (statement != null)
+					statement.close();
+				if (connection != null)
+					connection.close();//接続閉じる
 			} catch (SQLException e) {
 				return null;
 			}
@@ -126,9 +129,12 @@ public class BaseDAOImpl<T> implements BaseDAO<T> {
 			return null;
 		} finally {
 			try {
-				if (connection != null || statement != null || resultSet != null) {
-					connection.close();
-				}
+				if (resultSet != null)
+					resultSet.close();
+				if (statement != null)
+					statement.close();
+				if (connection != null)
+					connection.close();//接続閉じる
 			} catch (SQLException e) {
 				return null;
 			}
@@ -139,7 +145,7 @@ public class BaseDAOImpl<T> implements BaseDAO<T> {
 	public boolean saveOrUpdate(String sql, Object... params) {
 		Connection connection = null;
 		PreparedStatement statement = null;
-		boolean flag=false;
+		boolean flag = false;
 		try {
 			connection = getConnection();
 			connection.setAutoCommit(false);//コミットを呼ぶとき、データベースを変更する
@@ -148,7 +154,7 @@ public class BaseDAOImpl<T> implements BaseDAO<T> {
 			logger.info(statement);
 			statement.executeUpdate();//SQLクエリーを実行する
 			connection.commit();// データを変更する
-			flag=true;
+			flag = true;
 
 		} catch (SQLException e) {
 			if (connection != null) {
@@ -160,7 +166,10 @@ public class BaseDAOImpl<T> implements BaseDAO<T> {
 			}
 		} finally {
 			try {
-				if (connection != null || statement != null) {
+				if (statement != null) {
+					statement.close();
+				}
+				if (connection != null) {
 					connection.close();//接続閉じる
 				}
 			} catch (SQLException e_) {
