@@ -22,6 +22,7 @@ public class doFilterInternal implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
+		//含まれるデータの文字コードを指定した値に書き換える
 		response.setContentType("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");

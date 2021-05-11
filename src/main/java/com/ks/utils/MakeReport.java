@@ -38,7 +38,7 @@ public class MakeReport {
 
 	public void makePdf(OpenFunXion ofx, List<User> dataList) {
 
-		Collections.sort(dataList, new Comparator<User>() {//dataList配列をAuthorityId（役職）で並び
+		Collections.sort(dataList, new Comparator<User>() {//dataListをAuthorityId（役職）で並び
 			@Override
 			public int compare(User z1, User z2) {
 				if (z1.getAuthorityId() > z2.getAuthorityId())
@@ -48,7 +48,7 @@ public class MakeReport {
 				return 0;
 			}
 		});
-		HashSet<Integer> roleSize = new HashSet<Integer>();//dataList配列のAuthorityId数を保存する
+		HashSet<Integer> roleSize = new HashSet<Integer>();//dataListのAuthorityId数を保存する
 		for (int i = 0; i < dataList.size(); i++) {
 			roleSize.add(dataList.get(i).getAuthorityId());
 		}
@@ -59,7 +59,7 @@ public class MakeReport {
 		int moveY = 12 * 3;
 
 		int pageNo = 1;
-		int pageSum = sumPage(dataList) + roleSize.size();//総ページ数
+		int pageSum = sumPage(dataList) + roleSize.size();//総ページ数＝ N＋r ;N は項目がフルにあるページ数。 N ＋=サブList/15, r = 剰余のページ数 = 権限数
 		// レイアウトの固定部を出力
 		printOutline(ofx, dataList.get(0).getRole().getAuthorityName() == "" ? " 未登録"
 				: dataList.get(0).getRole().getAuthorityName());
@@ -181,7 +181,6 @@ public class MakeReport {
 		int size = list.size();
 		int idStart = list.get(0).getAuthorityId();
 		int count = 0;
-		int max = 0;
 		for (int i = 0; i < size; i++) {
 			int id = list.get(i).getAuthorityId();
 			if (id == idStart) {
@@ -189,11 +188,11 @@ public class MakeReport {
 			}
 			if (id != idStart) {
 				idStart = list.get(i).getAuthorityId();
-				max += count / 15;//総ページ数
+				sum += count / 15;//総ページ数
 				count = 0;
 			}
 		}
-		return max == 0 ? count / 15 : max;
+		return sum == 0 ? count / 15 : sum;
 	}
 
 }

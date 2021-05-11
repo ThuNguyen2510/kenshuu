@@ -66,13 +66,13 @@ public class ReportController extends HttpServlet {
 			}
 			inputStream.close();
 			outStream.close();
-		} else {//userList配列は空
+		} else {//userListは空
 			request.setAttribute("message", "※リスト要素が０です。");
 			List<User> listUser = userService.getListUser();//全てのユーザを取る
 			List<Role> listRole = roleService.getListRole();//全ての役職を取る
 			request.setAttribute("listUser", listUser);//ユーザリストを保存する
 			request.setAttribute("listRole", listRole);//役職リストを保存する
-			RequestDispatcher rd = request.getRequestDispatcher("/views/admin/home.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/views/admin/home.jsp");//一覧画面に遷移する
 			rd.forward(request, response);
 		}
 

@@ -189,7 +189,6 @@ public class UserController extends HttpServlet {
 						viewLink = "/views/admin/delete.jsp";
 					}
 				}
-
 			}
 		}
 		RequestDispatcher rd = request.getRequestDispatcher(viewLink);

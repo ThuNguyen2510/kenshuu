@@ -14,11 +14,11 @@ public class UserDAOImpl extends BaseDAOImpl<User> implements UserDAO {
 	public User checkByUserIdAndPassword(String userId, String password) {
 		StringBuilder sql = new StringBuilder("SELECT * FROM public.mst_user");
 		sql.append(" WHERE user_id = ? AND password = ?");
-		List<User> users = query(sql.toString(), new UserMapper(), userId, password);//　SQLクエリーを実行して、リストに保存する
+		List<User> users = query(sql.toString(), new UserMapper(), userId, password);//　SQLクエリーを実行して、リストに保持する
 		if (users.isEmpty())
 			return null;//　合っているユーザがない場合
 		else
-			return users.get(0);//合っているユーザがいる場合
+			return users.get(0);//合っているユーザがある場合
 
 	}
 

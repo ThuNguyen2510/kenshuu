@@ -31,14 +31,14 @@ public class TotalController extends HttpServlet {
 			throws ServletException, IOException {
 		logger.info("GET SUMMARY");
 		RequestDispatcher rd = request.getRequestDispatcher("/views/admin/total.jsp");
-		List<Count> listCount = totalService.getSummary();
+		List<Count> listCount = totalService.getSummary();//集計したデータを取る
 		request.setAttribute("listCount", listCount);
 		rd.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		if (request.getParameter("action")!="") {
+		if (request.getParameter("action")!="") {//集計ボタンを押下する
 			request.setAttribute("message", "最新の状態で更新されました。");
 		}
 		doGet(request, response);

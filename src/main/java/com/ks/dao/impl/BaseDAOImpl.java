@@ -148,7 +148,7 @@ public class BaseDAOImpl<T> implements BaseDAO<T> {
 		boolean flag = false;
 		try {
 			connection = getConnection();
-			connection.setAutoCommit(false);//コミットを呼ぶとき、データベースを変更する
+			connection.setAutoCommit(false);//何も設定せずにquery文を発行すると,自動コミット・モードを解除する
 			statement = connection.prepareStatement(sql);
 			setParameter(statement, params);//インプット（パラメータ）をセットする
 			logger.info(statement);
