@@ -56,8 +56,8 @@ h3 {
 										<strong>ユーザID:</strong>
 									</div>
 									<div class="col-md-8">
-										<input style="color:red" id="userId" type="text" value="${model.userId}"
-											name="userId" />
+										<input style="color: red" id="userId" type="text"
+											value="${model.userId}" name="userId" />
 									</div>
 								</div>
 							</div>
@@ -68,7 +68,7 @@ h3 {
 									</div>
 									<div class="col-md-8">
 										<input id="password" name="password" value="${model.password}"
-											type="text" />
+										type="password" >
 									</div>
 								</div>
 							</div>
@@ -81,7 +81,7 @@ h3 {
 									</div>
 									<div class="col-md-8">
 										<input type="text" id="familyname" name="familyName"
-											value="${model.familyName}" />
+											value="${model.familyName}">
 									</div>
 								</div>
 							</div>
@@ -129,7 +129,8 @@ h3 {
 										<strong>年齢:</strong>
 									</div>
 									<div class="col-md-8">
-										<input id="age" name="age" type="text" value="${model.age}" />
+										<input id="age" name="age" type="text" value="${model.age}"
+											style="text-align: right" />
 									</div>
 								</div>
 							</div>
@@ -176,13 +177,13 @@ h3 {
 						<div class="form-group row" style="padding-top: 40px">
 							<div class="col-sm-5">
 								<button id="back"
-									style="margin-left: 60%; border-radius: 10px; width: 30%; height: 40px;font-size: 20px; font-weight: 600;"
+									style="margin-left: 60%; border-radius: 10px; width: 30%; height: 40px; font-size: 20px; font-weight: 600;"
 									type="button">戻る</button>
 							</div>
 							<div class="col-sm-5">
 								<input type="hidden" name="action" value="create">
 								<button id="create" type="submit"
-									style="border-radius: 10px; width: 30%; height: 40px;font-size: 20px; font-weight: 600;">登録</button>
+									style="border-radius: 10px; width: 30%; height: 40px; font-size: 20px; font-weight: 600;">登録</button>
 							</div>
 						</div>
 					</div>

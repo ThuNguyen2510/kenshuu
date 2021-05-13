@@ -22,7 +22,7 @@
 	<%@ include file="/views/layout/header.jsp"%>
 	<c:if test="${not empty message}">
 		<div>
-			<h5 style="padding-left: 20px;font-weight: 600;">${message}</h5>
+			<h5 style="padding-left: 20px; font-weight: 600;">${message}</h5>
 		</div>
 	</c:if>
 	<div id="layoutSidenav_content">
@@ -38,7 +38,7 @@
 										<strong>姓:</strong>
 									</div>
 									<div class="col-md-8">
-										<input type="text" name="familyName" value="${familyName}"/>
+										<input type="text" name="familyName" value="${familyName}" />
 									</div>
 								</div>
 							</div>
@@ -63,7 +63,8 @@
 										<select name="authorityId" style="width: 182px; height: 30px">
 											<option value="-1"></option>
 											<c:forEach var="item" items="${listRole}">
-												<option value="${item.authorityId}"<c:if test="${item.authorityId == authorityId}">selected="selected"</c:if>>
+												<option value="${item.authorityId}"
+													<c:if test="${item.authorityId == authorityId}">selected="selected"</c:if>>
 													${item.authorityName}</option>
 											</c:forEach>
 										</select>
@@ -75,17 +76,18 @@
 								<div class="row">
 									<div class="col-md-5">
 										<button id="report" type="button"
-											style="margin-left: 100px; width: 150px; border-radius: 10px;font-size: 20px; font-weight: 600;">リスト</button>
+											style="margin-left: 100px; width: 150px; border-radius: 10px; font-size: 20px; font-weight: 600;">リスト</button>
 									</div>
 									<div class="col-md-5">
 										<button id="search" type="button"
-											style="width: 150px; border-radius: 10px;font-size: 20px; font-weight: 600;">検索</button>
+											style="width: 150px; border-radius: 10px; font-size: 20px; font-weight: 600;">検索</button>
 
 									</div>
 								</div>
 
 							</div>
 						</div>
+
 					</div>
 				</form>
 			</div>
@@ -108,7 +110,7 @@
 								<th>
 									<form action="<c:url value='/admin-user'/>" method="get">
 										<input type="hidden" value="create" name="action" />
-										<button style="width: 100%;border-radius:10px" >登録</button>
+										<button style="width: 100%; border-radius: 10px">登録</button>
 									</form>
 								</th>
 							</tr>
@@ -119,8 +121,9 @@
 							<c:forEach var="item" items="${listUser}">
 								<tr>
 									<td style="text-align: right">${i}</td>
-									<td>${item.userId}</td>
-									<td>${item.familyName}&nbsp;${item.firstName}</td>
+									<td><c:out value="${item.userId}"></c:out></td>
+									<td><c:out value="${item.familyName}"></c:out> &nbsp;<c:out
+											value="${item.firstName}"></c:out></td>
 									<td>${item.gender.genderName}</td>
 									<td style="text-align: right">${item.age}</td>
 									<td><c:if test="${item.admin==1}">
@@ -128,13 +131,11 @@
 										</c:if>${item.role.authorityName}</td>
 									<td>
 
-										<button style="width: 45%;border-radius:10px"
-											onclick="window.location.href='/kenshuu/admin-user?action=update&userId=${item.userId}'"
-											>変更</button>
+										<button style="width: 45%; border-radius: 10px"
+											onclick="window.location.href='/kenshuu/admin-user?action=update&userId=${item.userId}'">更新</button>
 
-										<button style="width: 45%;border-radius:10px"
-											onclick="window.location.href='/kenshuu/admin-user?action=delete&userId=${item.userId}'"
-											>削除</button>
+										<button style="width: 45%; border-radius: 10px"
+											onclick="window.location.href='/kenshuu/admin-user?action=delete&userId=${item.userId}'">削除</button>
 
 									</td>
 								</tr>

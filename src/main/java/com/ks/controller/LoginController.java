@@ -61,7 +61,7 @@ public class LoginController extends HttpServlet {
 			HttpSession session = request.getSession();
 			if (user != null) {//ユーザが見つけた場合/
 				logger.info("LOGIN SUCCESS");
-				session.setAttribute("currentUser", user.getUserId()); // セッションスに保存する
+				session.setAttribute("currentUser", user.getUserId()); // セッションに保存する
 				response.sendRedirect(request.getContextPath() + "/admin-user?action=get&message=success");
 			} else {//ユーザが見つからない場合
 				logger.info("LOGIN FAIL");

@@ -47,11 +47,14 @@ h3 {
 				<form action="<c:url value='/admin-user'/>" method="post">
 					<div class="card-body" style="padding-left: 25%; font-size: 20px;">
 						<div class="row">
-							<strong>ユーザID:&nbsp; &nbsp; ${model.userId}</strong>
+							<strong>ユーザID:&nbsp; &nbsp; <c:out
+									value="${model.userId}"></c:out></strong>
 						</div>
 						<div class="row">
 							<strong>氏名:&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
-								&nbsp;${model.familyName} ${model.firstName} </strong>
+								&nbsp; <c:out value="${model.familyName}"></c:out> <c:out
+									value="${model.firstName}"></c:out>
+							</strong>
 						</div>
 
 					</div>

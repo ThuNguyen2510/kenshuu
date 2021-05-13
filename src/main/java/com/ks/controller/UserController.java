@@ -32,11 +32,13 @@ public class UserController extends HttpServlet {
 	private UserService userService;
 	private RoleService roleService;
 	private GenderService genderService;
+	private int checkAge;
 
 	public UserController() {
 		userService = new UserServiceImpl();
 		roleService = new RoleServiceImpl();
 		genderService = new GenderServiceImpl();
+		checkAge = 1;
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -120,11 +122,14 @@ public class UserController extends HttpServlet {
 				request.setAttribute("authorityId", request.getParameter("authorityId"));
 			}
 			if (action.equals("create")) {
-				User newUser = mapForm(request);
 				logger.info("SAVE NEW USER");
-				logger.info(newUser.getFirstName());
+				String message = "";
+				User newUser = mapForm(request);
+				if (checkAge == 0) {//タイプが間違った場合
+					message += "※年齢は整数。";
+				}
 				ValidateUser validator = new ValidateUser();
-				String message = validator.validate(newUser);//ユーザのフィールドをバリデーションチェック、エラーをセットする
+				message += validator.validate(newUser);//ユーザのフィールドをバリデーションチェック、エラーをセットする
 				if (message.equals("") == false) {
 					request.setAttribute("message", message);
 					viewLink = "/views/admin/create.jsp";
@@ -144,13 +149,18 @@ public class UserController extends HttpServlet {
 					}
 				}
 				request.setAttribute("model", newUser);//入力したユーザ情報を返す
+				checkAge = 1;
 
 			}
 			if (action.equals("update")) {
 				logger.info("SAVE UPDATE USER");
+				String message = "";
 				User updateUser = mapForm(request);
+				if (checkAge == 0) {//タイプが間違った場合
+					message += "※年齢は整数。";
+				}
 				ValidateUser validator = new ValidateUser();
-				String message = validator.validate(updateUser);//ユーザのフィールドをバリデーションチェック、エラーをセットする
+				message += validator.validate(updateUser);//ユーザのフィールドをバリデーションチェック、エラーをセットする
 				if (message.equals("") == false) {
 					request.setAttribute("message", message);//更新失敗する
 					viewLink = "/views/admin/update.jsp";
@@ -165,6 +175,7 @@ public class UserController extends HttpServlet {
 					}
 				}
 				request.setAttribute("model", updateUser);//入力したユーザ情報を返す
+				checkAge = 1;
 			}
 			if (action.equals("delete")) {
 				logger.info("DELETE USER");
@@ -201,7 +212,7 @@ public class UserController extends HttpServlet {
 		newUser.setUserId(request.getParameter("userId"));
 		newUser.setPassword(request.getParameter("password"));
 		newUser.setFamilyName(request.getParameter("familyName"));
-		logger.info(request.getParameter("familyName"));
+		logger.info(request.getParameter("age"));
 		newUser.setFirstName(request.getParameter("firstName"));
 		newUser.setGenderId(Integer.parseInt(request.getParameter("genderId")));
 		newUser.setAuthorityId(Integer.parseInt(request.getParameter("authorityId")));
@@ -214,8 +225,20 @@ public class UserController extends HttpServlet {
 		if (request.getParameter("age") == null || request.getParameter("age").equals("") == true) {
 			newUser.setAge(-1);//年齢未入力
 		} else {
-			newUser.setAge(Integer.valueOf(request.getParameter("age")));
+			if (isInteger(request.getParameter("age")) == false) {//年齢のタイプをチェックする
+				checkAge = 0;
+			} else
+				newUser.setAge(Integer.valueOf(request.getParameter("age")));
 		}
 		return newUser;
+	}
+
+	public boolean isInteger(String strNum) {
+		try {
+			int intValue = Integer.parseInt(strNum);
+			return true;
+		} catch (NumberFormatException e) {
+			return false;
+		}
 	}
 }

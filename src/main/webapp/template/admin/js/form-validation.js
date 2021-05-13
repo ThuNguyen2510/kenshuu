@@ -27,7 +27,6 @@ $(document).ready(function () {
 					age : {
 						digits : true,
 					}
-
 				},
 				messages : {
 					userId : {
@@ -48,7 +47,7 @@ $(document).ready(function () {
 						maxlength : "※パスワードは8文字以下。",
 					},
 					age : {
-						digits : "※年齢は整数"
+						digits : "※年齢は整数です。"
 					}
 				},
 				 errorElement : 'h3',

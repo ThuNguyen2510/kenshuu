@@ -21,34 +21,31 @@ public class ValidateUser {
 		return false;
 	}
 
+
 	public String validate(User user) {
 		String errors = "";
 		if (isNullOrBlank(user.getUserId())) {
 			errors += "※ユーザーIDが未入力です。";
-		} else {
-			if (stringMoreThan(8, user.getUserId()))
-				errors += "ユーザーIDは8文字以下。";
+		} else if (stringMoreThan(8, user.getUserId())) {
+			errors += "ユーザーIDは8文字以下。";
 		}
 
 		if (isNullOrBlank(user.getPassword())) {
 			errors += "※パスワードが未入力です。";
-		} else {
-			if (stringMoreThan(8, user.getPassword()))
-				errors += "※パスワードは8文字以下。";
+		} else if (stringMoreThan(8, user.getPassword())) {
+			errors += "※パスワードは8文字以下。";
 		}
 
 		if (isNullOrBlank(user.getFamilyName())) {
 			errors += "※姓がが未入力です。";
-		} else {
-			if (stringMoreThan(10, user.getFamilyName()))
-				errors += "※姓は10文字以です。";
+		} else if (stringMoreThan(10, user.getFamilyName())) {
+			errors += "※姓は10文字以です。";
 		}
 
 		if (isNullOrBlank(user.getFirstName())) {
 			errors += "※名がが未入力です。";
-		} else {
-			if (stringMoreThan(10, user.getFirstName()))
-				errors += "※名は10文字以下です。";
+		} else if (stringMoreThan(10, user.getFirstName())) {
+			errors += "※名は10文字以下です。";
 		}
 		return errors;
 

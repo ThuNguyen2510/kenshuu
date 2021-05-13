@@ -37,7 +37,7 @@
 					<strong>ユーザID:</strong>
 				</div>
 				<div class="col-md-7">
-					<input class="txtBox" type="text" name="userId">
+					<input class="txtBox" type="text" name="userId" value="${userId}"">
 				</div>
 
 			</div>
@@ -47,7 +47,7 @@
 					<strong>パスワード:</strong>
 				</div>
 				<div class="col-md-7">
-					<input class="txtBox" type="password" name="password">
+					<input class="txtBox" type="password" name="password" value="${password}">
 				</div>
 			</div>
 

@@ -33,7 +33,7 @@ h3 {
 	color: red
 }
 </style>
-	<font style="padding: 30px;" size="8">変更</font>
+	<font style="padding: 30px;" size="8">更新</font>
 
 	<div class="errorTxt">
 		<c:if test="${not empty message}">
@@ -55,7 +55,7 @@ h3 {
 										<strong>ユーザID:</strong>
 									</div>
 									<div class="col-md-8">
-										<label style="color: red">${model.userId}</label>
+										<label style="color: red"><c:out value="${model.userId}"></c:out></label>
 									</div>
 								</div>
 							</div>
@@ -66,7 +66,7 @@ h3 {
 									</div>
 									<div class="col-md-8">
 										<input id="password" name="password" value="${model.password}"
-											type="text" />
+											type="password" />
 									</div>
 								</div>
 							</div>
@@ -127,7 +127,7 @@ h3 {
 										<strong>年齢:</strong>
 									</div>
 									<div class="col-md-8">
-										<input id="age" name="age" type="text"
+										<input id="age" name="age" type="text"　style="text-align:right"
 											<c:if test="${model.age!=0}">value="${model.age}"</c:if> />
 									</div>
 								</div>
