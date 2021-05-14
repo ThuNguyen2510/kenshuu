@@ -56,6 +56,8 @@ public class UserController extends HttpServlet {
 						request.setAttribute("message", "※ログインに成功しました。");
 				}
 				List<User> listUser = userService.getListUser();//全てのユーザを取る
+				User a = listUser.get(0);
+				logger.info(a.getAge());
 				List<Role> listRole = roleService.getListRole();//全ての役職を取る
 				request.setAttribute("listUser", listUser);//ユーザリストを保存する
 				request.setAttribute("listRole", listRole);//役職リストを保存する
@@ -67,7 +69,9 @@ public class UserController extends HttpServlet {
 				List<Role> listRole = roleService.getListRole();
 				request.setAttribute("listGender", listGender);
 				request.setAttribute("listRole", listRole);
-				request.setAttribute("model", new User());
+				User user = new User();
+				user.setAge(-1);
+				request.setAttribute("model", user);
 			}
 			if (action.equals("update")) {
 				logger.info("UPDATE USER");

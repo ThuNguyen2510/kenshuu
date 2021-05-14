@@ -68,7 +68,7 @@ h3 {
 									</div>
 									<div class="col-md-8">
 										<input id="password" name="password" value="${model.password}"
-										type="password" >
+											type="password">
 									</div>
 								</div>
 							</div>
@@ -129,7 +129,8 @@ h3 {
 										<strong>年齢:</strong>
 									</div>
 									<div class="col-md-8">
-										<input id="age" name="age" type="text" value="${model.age}"
+										<input id="age" name="age" type="text"
+											<c:if test="${model.age!='-1'}">value="${model.age}"</c:if>
 											style="text-align: right" />
 									</div>
 								</div>

@@ -19,7 +19,10 @@ public class UserMapper implements RowMapper<User> {
 			user.setFamilyName(resultSet.getString("family_name"));
 			user.setFirstName(resultSet.getString("first_name"));
 			user.setGenderId(resultSet.getInt("gender_id"));
-			user.setAge(resultSet.getInt("age"));
+			if (resultSet.getObject("age") == null) {
+				user.setAge(-1);
+			} else
+				user.setAge(resultSet.getInt("age"));
 			user.setAuthorityId(resultSet.getInt("authority_id"));
 			user.setAdmin(resultSet.getInt("admin"));
 			user.setCreateDate(resultSet.getLong("create_date"));
@@ -28,28 +31,28 @@ public class UserMapper implements RowMapper<User> {
 			user.setUpdateUserId(resultSet.getString("update_user_id"));
 			try {
 				/*ユーザのgender_nameを取る時*/
-				if (resultSet.getString("gender_name")!=null) {
+				if (resultSet.getString("gender_name") != null) {
 					Gender gen = new Gender();
 					gen.setGenderName(resultSet.getString("gender_name"));
 					gen.setGenderId(resultSet.getInt("gender_id"));
 					user.setGender(gen);
-				}else {
+				} else {
 					Gender gen = new Gender();
 					gen.setGenderName("");
 					user.setGender(gen);
 				}
-				if (resultSet.getString("authority_name")!=null) {
+				if (resultSet.getString("authority_name") != null) {
 					/*ユーザのauthority_nameを取る時*/
 					Role role = new Role();
 					role.setAuthorityName(resultSet.getString("authority_name"));
 					role.setAuthorityId(resultSet.getInt("authority_id"));
 					user.setRole(role);
-				}else {
-					Role role= new Role();
+				} else {
+					Role role = new Role();
 					role.setAuthorityName("");
 					user.setRole(role);
 				}
-			}catch(Exception ex) {
+			} catch (Exception ex) {
 
 			}
 			return user;

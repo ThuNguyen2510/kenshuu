@@ -128,7 +128,7 @@ h3 {
 									</div>
 									<div class="col-md-8">
 										<input id="age" name="age" type="text"　style="text-align:right"
-											<c:if test="${model.age!=0}">value="${model.age}"</c:if> />
+											<c:if test="${model.age!=-1}">value="${model.age}"</c:if> />
 									</div>
 								</div>
 							</div>

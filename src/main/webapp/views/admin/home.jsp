@@ -125,7 +125,9 @@
 									<td><c:out value="${item.familyName}"></c:out> &nbsp;<c:out
 											value="${item.firstName}"></c:out></td>
 									<td>${item.gender.genderName}</td>
-									<td style="text-align: right">${item.age}</td>
+									<td style="text-align: right"><c:if
+											test="${item.age!='-1'}">${item.age}</c:if> <c:if
+											test="${item.age=='-1'}"></c:if></td>
 									<td><c:if test="${item.admin==1}">
 											<span class="fa fa-star"></span>
 										</c:if>${item.role.authorityName}</td>
