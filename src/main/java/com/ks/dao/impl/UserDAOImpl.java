@@ -12,6 +12,7 @@ public class UserDAOImpl extends BaseDAOImpl<User> implements UserDAO {
 
 	@Override
 	public User checkByUserIdAndPassword(String userId, String password) {
+
 		StringBuilder sql = new StringBuilder("SELECT * FROM public.mst_user");
 		sql.append(" WHERE user_id = ? AND password = ?");
 		List<User> users = query(sql.toString(), new UserMapper(), userId, password);//　SQLクエリーを実行して、リストに保持する
@@ -41,7 +42,7 @@ public class UserDAOImpl extends BaseDAOImpl<User> implements UserDAO {
 			sql.append(" AND (u.family_name = ? )");
 			params.add(familyName);
 		}
-		if (firstName.equals("") != true) {//firstNameフィールドのインプットが入力した場合
+		if (firstName.equals("") != true ) {//firstNameフィールドのインプットが入力した場合
 			sql.append(" AND (u.first_name = ? )");
 			params.add(firstName);
 		}
@@ -57,6 +58,15 @@ public class UserDAOImpl extends BaseDAOImpl<User> implements UserDAO {
 
 	@Override
 	public boolean createUser(User newUser) {
+		if(newUser.getGenderId()==0) {
+			newUser.setGenderId(-1);
+		}
+		if(newUser.getAuthorityId()==0) {
+			newUser.setAuthorityId(-1);
+		}
+		if(newUser.getAge()==0) {
+			newUser.setAge(-1);
+		}
 		StringBuilder sql = new StringBuilder(
 				"INSERT INTO public.mst_user (user_id, password, family_name, first_name,");
 		sql.append(" admin, create_user_id, update_user_id, create_date, update_date, age, authority_id, gender_id)");
@@ -79,6 +89,15 @@ public class UserDAOImpl extends BaseDAOImpl<User> implements UserDAO {
 
 	@Override
 	public boolean updateUser(User updateUser) {
+		if(updateUser.getGenderId()==0) {
+			updateUser.setGenderId(-1);
+		}
+		if(updateUser.getAuthorityId()==0) {
+			updateUser.setAuthorityId(-1);
+		}
+		if(updateUser.getAge()==0) {
+			updateUser.setAge(-1);
+		}
 		StringBuilder sql = new StringBuilder(
 				"UPDATE public.mst_user SET password = ? ,family_name=?,first_name=?,admin=?,"
 						+ "age=?,authority_id=?,gender_id=?,update_user_id=?,update_date=?"

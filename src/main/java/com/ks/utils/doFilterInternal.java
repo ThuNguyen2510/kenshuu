@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
 
 @WebFilter("/*")
 public class doFilterInternal implements Filter {
@@ -23,10 +24,17 @@ public class doFilterInternal implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		//含まれるデータの文字コードを指定した値に書き換える
-		response.setContentType("UTF-8");
-		response.setCharacterEncoding("UTF-8");
-		request.setCharacterEncoding("UTF-8");
-		chain.doFilter(request, response);
+		HttpServletRequest req = (HttpServletRequest) request;
+		String uri =  req.getRequestURI();//リングを取る
+		if (uri.startsWith("/kenshuu/admin") || uri.startsWith("/kenshuu/total") || uri.startsWith("/kenshuu/report")) {
+			response.setContentType("UTF-8");
+			response.setCharacterEncoding("UTF-8");
+			request.setCharacterEncoding("UTF-8");
+			chain.doFilter(request, response);
+		}else {
+			chain.doFilter(request, response);
+		}
+
 	}
 
 	@Override

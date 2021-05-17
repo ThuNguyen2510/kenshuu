@@ -47,6 +47,7 @@ public class ValidateUser {
 		} else if (stringMoreThan(10, user.getFirstName())) {
 			errors += "※名は10文字以下です。";
 		}
+
 		return errors;
 
 	}
