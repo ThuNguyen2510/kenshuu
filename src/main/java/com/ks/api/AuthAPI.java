@@ -18,8 +18,9 @@ import com.ks.model.User;
 import com.ks.service.UserService;
 import com.ks.service.impl.UserServiceImpl;
 import com.ks.utils.HttpUtil;
+import com.ks.utils.JWTGenerate;
 
-@WebServlet("/api-auth")
+@WebServlet("/auth")
 public class AuthAPI extends HttpServlet {
 	private static final Logger logger = Logger.getLogger(AuthAPI.class);
 	private static final long serialVersionUID = 1L;
@@ -31,6 +32,16 @@ public class AuthAPI extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json");
+		logger.info("LOGOUT");
+		request.getSession().removeAttribute("currentUser");
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json");
 		logger.info("LOGIN");
@@ -43,23 +54,16 @@ public class AuthAPI extends HttpServlet {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
-		if (userService.checkByUserIdAndPassword(user.getUserId(), user.getPassword()) != null) {
+		if (userService.checkByUserIdAndPassword(user.getUserId(), user.getPassword()) != null) {//ユーザの情報をチェックして、成功の場合
+			String token = JWTGenerate.createJwtSignedHMAC(user.getUserId());//JWTを作成する
+			((ObjectNode) rootNode).put("token", token);
+			((ObjectNode) rootNode).put("familyName", userService.checkByUserIdAndPassword(user.getUserId(), user.getPassword()).getFamilyName());
 			request.getSession().setAttribute("currentUser", user.getUserId());
 			((ObjectNode) rootNode).put("status", "success");
-		} else {
+		} else {//ログインに失敗する場合/
 			((ObjectNode) rootNode).put("status", "fail");
 		}
-		mapper.writeValue(response.getOutputStream(), rootNode);
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("application/json");
-		logger.info("LOGOUT");
-		int userId = Integer.parseInt(request.getSession().getAttribute("currentUser").toString());
-		request.getSession().removeAttribute("currentUser");
-
+		mapper.writeValue(response.getOutputStream(), rootNode);//データを返す
 	}
 
 }

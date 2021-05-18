@@ -26,7 +26,7 @@ public class CountAPI extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json");
-		logger.info("COUNT ");
+		logger.info("COUNT");
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.writeValue(response.getOutputStream(),totalService.getSummary());
 

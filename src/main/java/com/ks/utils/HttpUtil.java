@@ -9,25 +9,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class HttpUtil {
 	private String value;
 
-	public String getValue() {
-		return value;
-	}
-
-	public void setValue(String value) {
-		this.value = value;
-	}
-
 	public HttpUtil(String value) {
 		this.value = value;
 	}
 
 	public <T> T  toModel(Class<T> tClass) throws JSONException {
 		try {
-			//JSONデータはモーダルに変える
+			//JSONデータはモーダルにマッピングする
 			return new ObjectMapper().readValue(value,tClass);
 		} catch (IOException e) {
 			// TODO 自動生成された catch ブロック
-
 			e.printStackTrace();
 		}
 		return null;
@@ -39,7 +30,7 @@ public class HttpUtil {
 		try {
 			String line;
 			while ((line = reader.readLine()) != null) {
-				sb.append(line);//  JSONデータを取って受けて、line変数に報告する
+				sb.append(line);//  JSONデータを取って受けて、sb に保持する
 			}
 		} catch (IOException e) {
 			System.out.println(e.getMessage());

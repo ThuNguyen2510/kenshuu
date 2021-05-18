@@ -55,7 +55,7 @@ public class SearchAPI extends HttpServlet {
 		}
 		List<User> listUser = userService.search(user.getFamilyName(), user.getFirstName(), user.getAuthorityId());
 		if (listUser == null || listUser.size() == 0) {
-			((ObjectNode) rootNode).put("message", "※ユーザが見つかりません。");
+			((ObjectNode) rootNode).put("message", "not_found");
 			mapper.writeValue(response.getOutputStream(), rootNode);
 		} else {
 			mapper.writeValue(response.getOutputStream(), listUser);

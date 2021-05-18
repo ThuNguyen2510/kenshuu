@@ -36,7 +36,19 @@ public class UserAPI extends HttpServlet {
 		response.setContentType("application/json");
 		logger.info("GET LIST");
 		ObjectMapper mapper = new ObjectMapper();
-		mapper.writeValue(response.getOutputStream(), userService.getListUser());
+		User user = null;
+		try {
+			user = HttpUtil.of(request.getReader()).toModel(User.class);//データをバイディングする
+		} catch (JSONException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+		if (user.getUserId() != null) {//ユーザを取る
+			mapper.writeValue(response.getOutputStream(), userService.getUser(user.getUserId()));
+		} else {//全てのユーザを取る
+			mapper.writeValue(response.getOutputStream(), userService.getListUser());
+		}
+
 	}
 
 	protected void doPut(HttpServletRequest request, HttpServletResponse response)
@@ -48,6 +60,7 @@ public class UserAPI extends HttpServlet {
 		String message = "";
 		User user = null;
 		JsonNode rootNode = mapper.createObjectNode();
+
 		try {
 			user = HttpUtil.of(request.getReader()).toModel(User.class);
 		} catch (JSONException e) {
@@ -63,11 +76,11 @@ public class UserAPI extends HttpServlet {
 			if (userService.getUser(user.getUserId()) != null) {
 				if (userService.updateUser(user)) {// 成功
 					((ObjectNode) rootNode).put("status", "success");
-				} else {
+				} else {//失敗
 					((ObjectNode) rootNode).put("status", "fail");
 				}
-			} else {
-				((ObjectNode) rootNode).put("message", "※ユーザが見つかりません。");
+			} else {//ユーザが見つからない
+				((ObjectNode) rootNode).put("message", "not_found");
 			}
 		}
 		mapper.writeValue(response.getOutputStream(), rootNode);
@@ -94,12 +107,12 @@ public class UserAPI extends HttpServlet {
 		if (!message.equals("")) {
 			((ObjectNode) rootNode).put("message", message);
 		} else {
-			if (userService.getUser(user.getUserId()) != null) {
-				((ObjectNode) rootNode).put("message", "※ユーザIDが重複しています。");
+			if (userService.getUser(user.getUserId()) != null) {//登録済みのユーザID
+				((ObjectNode) rootNode).put("message", "duplicate_user");
 			} else {
-				if (userService.createUser(user)) {
+				if (userService.createUser(user)) {//成功
 					((ObjectNode) rootNode).put("status", "success");
-				} else {
+				} else {//失敗
 					((ObjectNode) rootNode).put("status", "fail");
 				}
 			}
@@ -123,13 +136,13 @@ public class UserAPI extends HttpServlet {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
-		if (userService.getUser(user.getUserId()) == null) {
-			((ObjectNode) rootNode).put("message", "※ユーザが見つかりません。");
+		if (userService.getUser(user.getUserId()) == null) {//ユーザが見つからない場合
+			((ObjectNode) rootNode).put("message", "not_found");
 		} else {
-			if (userService.deleteUser(user.getUserId())) {
+			if (userService.deleteUser(user.getUserId())) {//削除成功の場合
 				((ObjectNode) rootNode).put("status", "success");
 			} else {
-				((ObjectNode) rootNode).put("status", "fail");
+				((ObjectNode) rootNode).put("status", "fail");//削除失敗の場合
 			}
 		}
 		mapper.writeValue(response.getOutputStream(), rootNode);
