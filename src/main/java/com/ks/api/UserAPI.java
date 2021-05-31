@@ -36,19 +36,8 @@ public class UserAPI extends HttpServlet {
 		response.setContentType("application/json");
 		logger.info("GET LIST");
 		ObjectMapper mapper = new ObjectMapper();
-		User user = null;
-		try {
-			user = HttpUtil.of(request.getReader()).toModel(User.class);//データをバイディングする
-		} catch (JSONException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		}
-		if (user.getUserId() != null) {//ユーザを取る
-			mapper.writeValue(response.getOutputStream(), userService.getUser(user.getUserId()));
-		} else {//全てのユーザを取る
-			mapper.writeValue(response.getOutputStream(), userService.getListUser());
-		}
-
+		//全てのユーザを取る
+		mapper.writeValue(response.getOutputStream(), userService.getListUser());
 	}
 
 	protected void doPut(HttpServletRequest request, HttpServletResponse response)

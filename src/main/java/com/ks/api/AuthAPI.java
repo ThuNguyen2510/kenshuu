@@ -36,7 +36,9 @@ public class AuthAPI extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json");
 		logger.info("LOGOUT");
+		ObjectMapper mapper = new ObjectMapper();
 		request.getSession().removeAttribute("currentUser");
+		mapper.writeValue(response.getOutputStream(), "logout_success");//データを返す
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -56,9 +58,9 @@ public class AuthAPI extends HttpServlet {
 		}
 		if (userService.checkByUserIdAndPassword(user.getUserId(), user.getPassword()) != null) {//ユーザの情報をチェックして、成功の場合
 			String token = JWTGenerate.createJwtSignedHMAC(user.getUserId());//JWTを作成する
-			((ObjectNode) rootNode).put("token", token);
-			((ObjectNode) rootNode).put("familyName", userService.checkByUserIdAndPassword(user.getUserId(), user.getPassword()).getFamilyName());
+			((ObjectNode) rootNode).put("token", "Bearer "+token);
 			request.getSession().setAttribute("currentUser", user.getUserId());
+			((ObjectNode) rootNode).put("familyName", userService.checkByUserIdAndPassword(user.getUserId(), user.getPassword()).getFamilyName());
 			((ObjectNode) rootNode).put("status", "success");
 		} else {//ログインに失敗する場合/
 			((ObjectNode) rootNode).put("status", "fail");

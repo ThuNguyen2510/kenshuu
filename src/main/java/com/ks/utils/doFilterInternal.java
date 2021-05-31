@@ -41,6 +41,7 @@ public class doFilterInternal implements Filter {
 				return;
 			}
 			String token = authorizationHeader.substring("Bearer".length()).trim();//”Bearer ”を Authorizationから切って、JWTを取得する
+
 			try {
 				// ヴァリデーション
 				if (JWTGenerate.isTokenExpired(token)) {
@@ -57,8 +58,8 @@ public class doFilterInternal implements Filter {
 
 	private boolean isTokenBasedAuthentication(String authorizationHeader) {
 
-		return authorizationHeader != null
-				&& authorizationHeader.toLowerCase().startsWith("Bearer".toLowerCase() + " ");
+		return authorizationHeader != null && authorizationHeader.toLowerCase().startsWith("Bearer".toLowerCase() + " ");
+
 	}
 
 	private void abortWithUnauthorized(HttpServletResponse response) {

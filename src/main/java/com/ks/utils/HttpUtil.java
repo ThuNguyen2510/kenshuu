@@ -32,6 +32,7 @@ public class HttpUtil {
 			while ((line = reader.readLine()) != null) {
 				sb.append(line);//  JSONデータを取って受けて、sb に保持する
 			}
+
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
