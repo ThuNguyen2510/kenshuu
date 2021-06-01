@@ -69,7 +69,7 @@ public class UserAPI extends HttpServlet {
 					((ObjectNode) rootNode).put("status", "fail");
 				}
 			} else {//ユーザが見つからない
-				((ObjectNode) rootNode).put("message", "not_found");
+				((ObjectNode) rootNode).put("status", "not_found");
 			}
 		}
 		mapper.writeValue(response.getOutputStream(), rootNode);
@@ -97,7 +97,7 @@ public class UserAPI extends HttpServlet {
 			((ObjectNode) rootNode).put("message", message);
 		} else {
 			if (userService.getUser(user.getUserId()) != null) {//登録済みのユーザID
-				((ObjectNode) rootNode).put("message", "duplicate_user");
+				((ObjectNode) rootNode).put("status", "duplicate_user");
 			} else {
 				if (userService.createUser(user)) {//成功
 					((ObjectNode) rootNode).put("status", "success");
